@@ -1,0 +1,40 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: demo - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Debug/demo.res" /d "_DEBUG" /d "_AFXDLL" "E:\dealwith\空间点云数据的各种变换和检选以及二维点云的三角化\2009-12-12空间点云数据的各种变换和检选以及二维点云的三角化\demo.rc"" 
+Creating temporary file "C:\DOCUME~1\amy\LOCALS~1\Temp\RSP19C.tmp" with contents
+[
+rauxlib.lib opengl32.lib glu32.lib gpib-32.obj WINMM.LIB /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /incremental:yes /pdb:"Debug/demo.pdb" /debug /machine:I386 /nodefaultlib:"libc.lib msvcrt.lib libcd.lib libcmtd.lib msvcrtd.lib" /out:"Debug/demo.exe" /pdbtype:sept 
+".\Debug\ArcBall.obj"
+".\Debug\ChooseField.obj"
+".\Debug\ControlWnd.obj"
+".\Debug\demo.obj"
+".\Debug\demoDoc.obj"
+".\Debug\demoView.obj"
+".\Debug\InputScanName.obj"
+".\Debug\LoadEzdFile.obj"
+".\Debug\MainFrm.obj"
+".\Debug\PenParam.obj"
+".\Debug\ScanObj.obj"
+".\Debug\SelectDLG.obj"
+".\Debug\StdAfx.obj"
+".\Debug\TRIANGLE.OBJ"
+".\Debug\demo.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\amy\LOCALS~1\Temp\RSP19C.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Linking...
+
+
+
+<h3>Results</h3>
+demo.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
