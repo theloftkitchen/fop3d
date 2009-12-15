@@ -572,13 +572,7 @@ void CDemoView::DrawPoints(GLenum mode)
 			  
 				}
 				
-				/*
-				for (int i = 0;i<cntrldlg.num3Dpoint;++i)
-								{
-									glColor3f(1.0f,1.0f,1.0f);
-									glVertex3f(cntrldlg.m_n3DPoints[i][0],cntrldlg.m_n3DPoints[i][1],cntrldlg.m_n3DPoints[i][2]);
-								}*/
-				
+			
 				
 			}
 			glEnd();
@@ -1515,7 +1509,7 @@ void CDemoView::OnInitialUpdate()
 	
 	if(lmc1_Initial!=NULL)
 	{
-		nErr = lmc1_Initial(_T("E:\\zhenjing"),0,GetSafeHwnd());
+		nErr = lmc1_Initial(_T("E:\\document\\X项目\\一位成像系统\\控制卡\\EzCad2.1.3(20090912)"),0,GetSafeHwnd());
 		if(nErr!=LMC1_ERR_SUCCESS)
 		{
 			CString strErr;

@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CPenParam
+LastClass=CScanObj
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "demo.h"
@@ -15,22 +15,22 @@ Class3=CDemoView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDD_LOADFILE
+Resource1=IDD_ControlWnd
 Class5=CAboutDlg
-Resource2=IDD_ControlWnd
+Resource2=IDD_ABOUTBOX
 Class6=SelectDLG
-Resource3=IDD_InputScanName
+Resource3=IDR_MAINFRAME
 Class7=CControlWnd
 Resource4=IDD_SELECTDLG
 Class8=CInputScanName
-Resource5=IDD_PENPARA
+Resource5=IDD_InputScanName
 Class9=CPenParam
-Resource6=IDD_SCANOBJ
-Class10=CScanObj
-Resource7=IDD_ABOUTBOX
+Resource6=IDD_LOADFILE
+Class10=CChooseField
+Resource7=IDD_SCANOBJ
 Class11=CLoadEzdFile
-Resource8=IDR_MAINFRAME
-Class12=CChooseField
+Resource8=IDD_PENPARA
+Class12=CScanObj
 Resource9=IDD_CHOOSEFIELD
 
 [CLS:CDemoApp]
@@ -176,7 +176,7 @@ HeaderFile=SelectDLG.h
 ImplementationFile=SelectDLG.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_3DPOS
+LastObject=ID_ANIMATE
 VirtualFilter=dWC
 
 [DLG:IDD_ControlWnd]
@@ -281,18 +281,10 @@ Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_SCANSTART,button,1342242816
 Control4=IDC_COUNTDISTANCE,button,1342242816
-Control5=IDC_EDIT1,edit,1350631552
+Control5=IDC_EDIT_DISTANCE,edit,1350631552
 Control6=IDC_STATIC,static,1342308352
 Control7=IDC_STATIC,static,1342308352
 Control8=IDC_EDIT2,edit,1350631552
-
-[CLS:CScanObj]
-Type=0
-HeaderFile=ScanObj.h
-ImplementationFile=ScanObj.cpp
-BaseClass=CDialog
-Filter=D
-LastObject=CScanObj
 
 [DLG:IDD_LOADFILE]
 Type=1
@@ -331,5 +323,14 @@ ImplementationFile=ChooseField.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=IDC_FIELD
+VirtualFilter=dWC
+
+[CLS:CScanObj]
+Type=0
+HeaderFile=ScanObj.h
+ImplementationFile=ScanObj.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDC_EDIT_DISTANCE
 VirtualFilter=dWC
 

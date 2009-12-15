@@ -5,23 +5,22 @@
 #pragma once
 #endif // _MSC_VER > 1000
 // ControlWnd.h : header file
-//
-//#include "MainFrm.h"
-//#include "CInputScanOName.h"
+
+#include "demoView.h"
 #include "InputScanName.h"
 #include "PenParam.h"
-#include "ScanObj.h"
 #include "LoadEzdFile.h"
-#include "MarkEzdDll.h"
 #include "ChooseField.h"
+#include "ScanObj.h"
 /////////////////////////////////////////////////////////////////////////////
 // CControlWnd form view
-
+//class CScanObj;
 
 #ifndef __AFXEXT_H__
 #include <afxext.h>
 #endif
-
+void GpibError(char *msg);        /* Error function declaration              */
+void Convert (int mode,int expd,int samples,int index);
 class CMainFrame;
 class CControlWnd : public CFormView
 {
@@ -66,9 +65,9 @@ public:
 	int m_nDrawCounter;
 	CInputScanName dlgInputname;
 	CPenParam dlgPenParam;
-	CScanObj dlgScanObj;
 	CLoadEzdFile dlgLoadFile;
 	CChooseField dlgChooseField;
+	CScanObj dlgScanObj;
 	BOOL m_nIsMarkFromFile;
 	//variable on hardware
 //	double fdata[MEASURETIMES]; //测量结果 2W 次
@@ -103,9 +102,7 @@ public:
 
 // Implementation
 public:
-	
 	void ReadFromDBFunc();
-	
 	void LaunchProgress(int num);
 	virtual ~CControlWnd();
 #ifdef _DEBUG

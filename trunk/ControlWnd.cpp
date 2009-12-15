@@ -1,10 +1,11 @@
 // ControlWnd.cpp : implementation file
 //
 
+
 #include "stdafx.h"
-#include "demo.h"
 #include "ControlWnd.h"
-#include "demoView.h"
+#include "MarkEzdDll.h"
+#include "demo.h"
 #include <math.h>
 #include <vector>
 #include <algorithm>
@@ -21,8 +22,7 @@ using namespace std;
 FILE *out;
 ///gpib
 short  Buffer[120000];             /* Read buffer							 */
-void GpibError(char *msg);        /* Error function declaration              */
-void Convert (int mode,int expd,int samples,int index);
+
 
 int Device ;                   /* Device unit descriptor                  */
 int BoardIndex;              /* Interface Index (GPIB0=0,GPIB1=1,etc.)  */

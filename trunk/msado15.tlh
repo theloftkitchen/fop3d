@@ -3,7 +3,7 @@
 // msado15.tlh
 //
 // C++ source equivalent of Win32 type library C:\Program Files\Common Files\System\ado\msado15.dll
-// compiler-generated file created 12/15/09 at 09:12:55 - DO NOT EDIT!
+// compiler-generated file created 12/15/09 at 13:24:26 - DO NOT EDIT!
 
 #pragma once
 #pragma pack(push, 8)

@@ -110,7 +110,7 @@ BOOL CDemoApp::InitInstance()
 		if(SUCCEEDED(hr))
 		{
 			m_pConnection->ConnectionString="File Name=Data.udl";
-			m_pConnection->ConnectionTimeout=1;//等待连接的时间为20s
+			m_pConnection->ConnectionTimeout=10;//等待连接的时间为20s
 			hr=m_pConnection->Open("","","",adConnectUnspecified);
 			if(FAILED(hr))
 			{

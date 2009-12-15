@@ -6,7 +6,6 @@
 
 #include "MainFrm.h"
 #include "ControlWnd.h"
-
 #include "demoView.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW

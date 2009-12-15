@@ -18,6 +18,8 @@
 #include <afxdtctl.h>		// MFC support for Internet Explorer 4 Common Controls
 #ifndef _AFX_NO_AFXCMN_SUPPORT
 #include <afxcmn.h>			// MFC support for Windows Common Controls
+#include "ni488.h"
+#include "Resource.h"
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 

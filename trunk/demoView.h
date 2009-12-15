@@ -35,7 +35,7 @@ protected: // create from serialization only
 public:
 	CDemoDoc* GetDocument();
 	CMainFrame *m_pFr;
-
+	
 	void DrawAxis();
 	SelectDLG dlgload;
 
@@ -48,7 +48,7 @@ public:
 	void ShowLight();
 	void DrawIndex();
 
-   CControlWnd cntrldlg;
+//    CControlWnd cntrldlg;
 
 	int mouseX;
 	int mouseY;
