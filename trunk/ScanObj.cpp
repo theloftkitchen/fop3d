@@ -112,7 +112,7 @@ BOOL CScanObj::OnInitDialog()
 void CScanObj::OnCountdistance() 
 {
 	// TODO: Add your control notification handler code here
-	int buffer[10];
+	char buffer[101];
 	int Device;
 	double data;
 	int   PrimaryAddress = 1;      /* Primary address of the device           */
@@ -156,13 +156,14 @@ void CScanObj::OnCountdistance()
 	}
 	m_pDemoView->lmc1_WritePort(0x8000);
 
-	ibrd(Device,buffer,20);
+	ibrd(Device,buffer,100);
 	if (ibsta & ERR) {
 		GpibError("ibrd Error");
 	}
-	char tmp[20];
-	sprintf(tmp,"%.14f",buffer);
-	data=atof(tmp);
+	buffer[ibcntl]='\n';
+//	CString tmp;
+//	sprintf(tmp,"%s",buffer);
+	data=atof(buffer);
 
 	long  CV=299792458;
 	m_distance = CV*(data)/2;
