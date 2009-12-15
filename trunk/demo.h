@@ -21,7 +21,7 @@
 #include <gl/glaux.h>
 #include <glut.h>
 const int MESSAGE_STEPPRO = WM_USER + 102;
-const int MEASURETIMES = 100000;
+const int MEASURETIMES = 30000;
 /////////////////////////////////////////////////////////////////////////////
 // CDemoApp:
 // See demo.cpp for the implementation of this class

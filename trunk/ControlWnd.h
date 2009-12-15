@@ -71,7 +71,7 @@ public:
 	CChooseField dlgChooseField;
 	BOOL m_nIsMarkFromFile;
 	//variable on hardware
-	double fdata[MEASURETIMES]; //测量结果 2W 次
+//	double fdata[MEASURETIMES]; //测量结果 2W 次
 
 
 

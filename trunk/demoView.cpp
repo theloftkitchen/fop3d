@@ -16,7 +16,6 @@
 #include <algorithm>
 using namespace std;
 
-#define MEASURETIMES 10000
  
 
 
