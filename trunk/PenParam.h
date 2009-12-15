@@ -35,7 +35,8 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(CPenParam)
-		// NOTE: the ClassWizard will add member functions here
+	virtual BOOL OnInitDialog();
+	virtual void OnOK();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

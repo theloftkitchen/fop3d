@@ -14,6 +14,7 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CLoadEzdFile dialog
 extern CDemoApp theApp;
+BOOL m_nIsLoad;
 
 CLoadEzdFile::CLoadEzdFile(CWnd* pParent /*=NULL*/)
 	: CDialog(CLoadEzdFile::IDD, pParent)
@@ -27,6 +28,7 @@ CLoadEzdFile::CLoadEzdFile(CWnd* pParent /*=NULL*/)
 //	m_pContrlWnd = NULL;
 	m_pCon = NULL;
 	m_pPFr = NULL;
+	m_nIsLoad = FALSE;
 
 }
 
@@ -200,6 +202,7 @@ void CLoadEzdFile::OnOK()
 {
 	// TODO: Add extra validation here
 	UpdateData(true);
+	m_nIsLoad = true;
 
 	CDialog::OnOK();
 }
