@@ -1,0 +1,32 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: DemoEzd - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"debug/DemoEzd.res" /d "_DEBUG" /d "_AFXDLL" "D:\发布软件\最新软件\EzCad2.0.13国际版(20080526)\DemoEzd\DemoEzd.rc"" 
+Creating temporary file "C:\DOCUME~1\qydc\LOCALS~1\Temp\RSPA7.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "UNICODE" /FR"debug/" /Fp"debug/DemoEzd.pch" /Yu"stdafx.h" /Fo"debug/" /Fd"debug/" /FD /GZ /c 
+"D:\发布软件\最新软件\EzCad2.0.13国际版(20080526)\DemoEzd\DemoEzdDlg.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\qydc\LOCALS~1\Temp\RSPA7.tmp" 
+Creating command line "link.exe /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /incremental:yes /pdb:"debug/DemoEzd.pdb" /debug /machine:I386 /out:"../DemoEzd.exe" /pdbtype:sept  ".\debug\DemoEzd.obj" ".\debug\DemoEzdDlg.obj" ".\debug\StdAfx.obj" ".\debug\DemoEzd.res" "
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+DemoEzdDlg.cpp
+Linking...
+Creating command line "bscmake.exe /nologo /o"debug/DemoEzd.bsc"  ".\debug\StdAfx.sbr" ".\debug\DemoEzd.sbr" ".\debug\DemoEzdDlg.sbr""
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+DemoEzd.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

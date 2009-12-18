@@ -1,0 +1,6 @@
+1.add an interface by which can modify the jump-data;
+2.add a value of angle to angleVer and can be changed;
+
+3.can save raw data of time from SR620,this is ,to create a new database.
+
+

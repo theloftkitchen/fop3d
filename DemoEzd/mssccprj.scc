@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[DemoEzd.dsp]
+SCC_Aux_Path = "\\Server\ezcad_vss\"
+SCC_Project_Name = "$/EZCAD2.0_UNICODE/PRJ/DemoEzd", XWFCAAAA
+
+[DemoEzd.dsw]
+SCC_Aux_Path = "\\Server\ezcad_vss\"
+SCC_Project_Name = "$/EZCAD2.0_UNICODE/PRJ/DemoEzd", XWFCAAAA

@@ -1,0 +1,90 @@
+;; JCZLC.INF - INF to install Laser Cut Devic
+;; Copyright (c) 2004, JinChengZi Corporation,LTD
+;; 北京金橙子科技有限公司
+;; Use Add New Hardware (other devices) from the Control Panel
+;; 2006-12-04 Support Analog FPK
+;; 2007-1-25 Support Mark on fly
+
+[Version]
+Signature=$CHICAGO$
+Class="Laser Device"
+ClassGUID={F9F78A7F-FF58-42a7-88F7-B75AB33F34C7}
+Provider=%BJJCZ%
+DriverVer=06/25/2009,6.0.0.0
+; Copyright (c) 2007, JinChengZi Corporation,LTD
+
+[ClassInstall]
+Addreg=Class_AddReg
+
+[ClassInstall32]
+Addreg=Class_AddReg
+
+[Class_AddReg]
+HKR,,,,%DeviceClassName%
+HKR,,Icon,,"-5"
+
+[Manufacturer]
+%BJJCZ%=DeviceList
+
+[DeviceList]
+%LMDEV_1%=InstallLMC1,PCI\VEN_10B5&DEV_5201&SUBSYS_0001CECE
+
+[InstallLMC1]
+DriverVer=06/25/2009,6.0.0.0
+CopyFiles=Lmc1.copy
+AddReg=Lmc1_9x_registry
+
+[Lmc1_9x_registry]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,lmc.sys
+HKR, "Parameters", "BreakOnEntry", 0x00010001, 0
+
+[InstallLMC1.NT]
+DriverVer=06/25/2009,6.0.0.0
+CopyFiles=Lmc1.copy
+AddReg=Lmc1_NT_registry
+
+[InstallLMC1.NT.Services]
+AddService=LMC1,2,Lmc1.Service
+
+[InstallLMC1.NTx86]
+DriverVer=06/25/2009,6.0.0.0
+CopyFiles=Lmc1.copy
+AddReg=Lmc1_NT_registry
+
+[InstallLMC1.NTx86.Services]
+AddService=LMC1,2,Lmc1.Service
+
+[Lmc1.Service]
+DisplayName=%LmcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\lmc.sys
+
+[Lmc1_NT_registry]
+HKLM, "System\CurrentControlSet\Services\LMC1\Parameters",\
+	"BreakOnEntry", 0x00010001, 0
+
+[Lmc1.copy]
+lmc.sys,,,2
+
+[ControlFlags]
+
+[SourceDisksNames]
+1=%InstallDisk%,DISK1,1
+
+[SourceDisksFiles]
+lmc.sys=1
+
+[DestinationDirs]
+DefaultDestDir=11
+Lmc1.copy=10,System32\Drivers
+
+[Strings]
+BJJCZ = "BeiJing JCZ Co.,Ltd "
+LMDEV_1  = "Laser Mark Control Board I"
+DEVICON   ="System\CurrentControlSet\Services\Class\Laser Device"
+InstallDisk = "BJJCZ Laser Device Install" 
+LmcDesc="Laser Mark Board Driver"
+DeviceClassName="Laser Device"
