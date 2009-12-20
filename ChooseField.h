@@ -14,6 +14,7 @@ class CChooseField : public CDialog
 {
 // Construction
 public:
+	void ReadFromDataBase();
 	CChooseField(CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
@@ -44,6 +45,7 @@ protected:
 	afx_msg void OnDestroy();
 	virtual void OnOK();
 	virtual void OnCancel();
+	afx_msg void OnDeletefromdb();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

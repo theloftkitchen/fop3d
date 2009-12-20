@@ -1541,7 +1541,9 @@ void CDemoView::OnInitialUpdate()
 
 		if(lmc1_Initial!=NULL)
 		{
-			nErr = lmc1_Initial(_T("D:\\EzCadπ‚≈Ã\\EzCad2.1.3_UNICODE(20091023)"),0,GetSafeHwnd());
+		//	nErr = lmc1_Initial(_T("D:\\EzCadπ‚≈Ã\\EzCad2.1.3_UNICODE(20091023)"),0,GetSafeHwnd());
+			nErr = lmc1_Initial(_T("E:\\zhenjing"),0,GetSafeHwnd());
+
 			if(nErr!=LMC1_ERR_SUCCESS)
 			{
 				CString strErr;

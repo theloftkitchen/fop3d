@@ -198,17 +198,35 @@ void CControlWnd::OnSaveData()
 	{
 		if (dlgInputname.m_nReturnName == "")
 		{
-			AfxMessageBox(_T("扫描物体名称不能为空,请重新输入!"));
-			return;
+			AfxMessageBox(_T("扫描物体名称不能为空!"));
+		//	SendMessage(WM_CLOSE,0,0);
 		}
-		m_nScanObjectName = dlgInputname.m_nReturnName;
+		else
+		{
+
+			m_nScanObjectName = dlgInputname.m_nReturnName;
+			if (dlgInputname.m_nIsReplace == TRUE)
+			{
+				m_pSaveThread = AfxBeginThread(UpdataDataFunc,this);
+
+			}
+			else
+			{
+				m_pSaveThread = AfxBeginThread(SaveDataFunc,this);
+
+			}
+			
+
+		}
+
+		
 	}
 	
 	//add 进度条...
 	
 	/*	if(m_bRDflag)
 	{*/
-				m_pSaveThread = AfxBeginThread(SaveDataFunc,this);
+			
 				
 				
 				/*
@@ -409,6 +427,59 @@ UINT CControlWnd::SaveDataFunc(LPVOID lpParam)
 	return 0;
 }
 
+UINT CControlWnd::UpdataDataFunc(LPVOID lpParam)
+{
+	CControlWnd *me = (CControlWnd *)lpParam;
+	//open the database;
+	
+	
+	//update from database;
+	
+	
+	me->m_pRecordset.CreateInstance(__uuidof(Recordset));
+	CString vSQLIN;
+	_variant_t RecordAffected;
+	CString strFor;
+	
+	//	vector<double>::iterator Poiter;
+	int i=0;
+	int m = 0,n = 0;
+	theApp.m_pConnection->BeginTrans();
+	for(i=0;i<me->m_nDrawCounter;++i)
+	{
+		vSQLIN.Format(_T("update datatable set DATAX=%f,DATAY=%f,DATAZ=%f,SCANNUM=%f where DATANAME='%s'"),DataX[i],DataY[i],DataZ[i],me->m_nScanNum,me->m_nScanObjectName);
+		try
+		{
+			
+			theApp.m_pConnection->Execute(_bstr_t(vSQLIN),&RecordAffected,adCmdText);
+			
+		}
+		catch(_com_error e)
+		{
+			theApp.m_pConnection->RollbackTrans();
+			AfxMessageBox(e.ErrorMessage());
+		}
+		if (0 == n || n == 156/*(m_nScanNum*m_nScanNum)/100,正确*/ )
+		{
+			++m;
+			me->LaunchProgress(m);
+			
+			n = 0;
+			
+		}
+		++n;
+		
+	}
+	theApp.m_pConnection->CommitTrans();			
+	
+	
+	AfxMessageBox(_T("insert successfully"));
+	//	me->m_pRecordset->close();
+	me->m_pRecordset = NULL;
+
+	return 0;
+}
+
 
 
 
@@ -550,6 +621,8 @@ void CControlWnd::OnReadgpib()
 		m_pSaveThread = NULL;
 	}
 	*/
+	m_cPenParam.EnableWindow(FALSE);
+	m_cReadFromGPIB.EnableWindow(FALSE);
 	
 	
 }
@@ -786,11 +859,6 @@ void CControlWnd::OnReadfromdb()
 		
 		this->m_pFr->m_pTreeView->Invalidate();
 	}
-	else
-	{
-		MessageBox(_T("没有读取任何数据"),_T("提示"),48+0);
-		
-	}
 	
 }
 
@@ -864,19 +932,29 @@ void CControlWnd::ReadFromDBFunc()
 void CControlWnd::OnLoadezdfile() 
 {
 	// TODO: Add your control notification handler code here
-	m_cPenParam.EnableWindow(TRUE);
-	m_cReadFromGPIB.EnableWindow(TRUE);
+
 	
-	if (dlgLoadFile.DoModal() == IDOK)
+	if (dlgLoadFile.DoModal() == IDOK )
 	{
-		m_nLoadFileName = dlgLoadFile.m_nReturnLoadFileName;
+		if (dlgLoadFile.m_nReadFlag == TRUE)
+		{
+			m_nLoadFileName = dlgLoadFile.m_nReturnLoadFileName;
+			m_cPenParam.EnableWindow(TRUE);
+			m_cReadFromGPIB.EnableWindow(TRUE);
+		}
+		else
+		{
+			MessageBox(_T("没有打开模型文件!"),_T("提示"),0+48+0);
+			SendMessage(WM_CLOSE,0,0);
+		}
+		
 		//			m_nIsMarkFromFile = TRUE;
 		
 	}
 	else
 	{
 		
-		MessageBox(_T("没有打开任何文件!"),_T("提示"),0+48+0);
+
 		SendMessage(WM_CLOSE,0,0);
 		
 	}

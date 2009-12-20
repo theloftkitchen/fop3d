@@ -23,6 +23,7 @@ CInputScanName::CInputScanName(CWnd* pParent /*=NULL*/)
 		// NOTE: the ClassWizard will add member initialization here
 	m_nScanObjectName = _T("");
 	m_nReturnName = _T("");
+	m_nIsReplace = FALSE;
 
 //	m_nScanNumQuery = 160.0;
 	//}}AFX_DATA_INIT
@@ -74,22 +75,24 @@ void CInputScanName::OnOK()
 	}
 	else
 	{
-		if (MessageBox(_T("请重新输入一个名字!"),_T("提示"),4+48+0)==IDYES)
+		if (MessageBox(_T("是否替换现有数据库中的数据!"),_T("询问"),4+32+0)==IDYES)
 		{
-			m_nScanObjectName = _T("");
-			this->GetDlgItem(IDC_INPUTSCANNAME)->SetFocus();
-			this->UpdateData(FALSE);
+			m_nReturnName = m_nScanObjectName;
+			m_nIsReplace = TRUE;
+			
 			
 		}
+	
+
+		m_nScanObjectName = _T("");
+		this->GetDlgItem(IDC_INPUTSCANNAME)->SetFocus();
+		this->UpdateData(FALSE);
+			
 		
 		
 		
 	}
 	
-
-
-//	UpdateData(FALSE);
-
     	
 
 	

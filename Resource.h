@@ -73,6 +73,7 @@
 #define IDC_CHECKDEFAULT                1074
 #define IDC_ENDCOMP                     1075
 #define IDC_RETURNNAME                  1077
+#define IDC_DELETEFROMDB                1078
 #define ID_LOAD                         32771
 #define IDM_SHOW_POINTS                 32772
 #define IDM_SHOW_MESH                   32773
@@ -110,7 +111,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        149
 #define _APS_NEXT_COMMAND_VALUE         32812
-#define _APS_NEXT_CONTROL_VALUE         1078
+#define _APS_NEXT_CONTROL_VALUE         1079
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
