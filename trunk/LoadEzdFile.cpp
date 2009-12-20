@@ -31,6 +31,7 @@ CLoadEzdFile::CLoadEzdFile(CWnd* pParent /*=NULL*/)
 	m_pPFr = NULL;
 	m_IsLoad = FALSE;
 	m_nReturnLoadFileName = _T("");
+	m_nReadFlag = FALSE;
 
 }
 
@@ -64,6 +65,7 @@ BOOL CLoadEzdFile::OnInitDialog()
 //	m_pContrlWnd = (CMainFrame*)AfxGetApp()->m_pMainWnd->m_pCtrlWnd;
 	m_pPFr = (CMainFrame*)AfxGetMainWnd();
 	m_pCon = m_pPFr->m_pTreeView;
+	this->GetDlgItem(IDC_FILESCAN)->SetFocus();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -81,6 +83,8 @@ void CLoadEzdFile::OnFilescan()
 	{
 		m_strFileName = dlg.GetPathName();
 		m_nReturnLoadFileName = m_strFileName;
+		m_nReadFlag = TRUE;
+		m_IsLoad = TRUE;
 
 		UpdateData(FALSE);
 		
@@ -121,6 +125,11 @@ void CLoadEzdFile::OnFilescan()
 		
 		m_pPrevBmp = m_pCon->lmc1_GetPrevBitmap(pWnd->GetSafeHwnd(),rect.Width(),rect.Height());
 		OnDrawPreview();
+	}
+	else
+	{
+			MessageBox(_T("没有打开任何文件!"),_T("提示"),0+48+0);
+		
 	}
 }
 
@@ -186,17 +195,7 @@ void CLoadEzdFile::OnDestroy()
 		delete m_pPrevBmp;
 		m_pPrevBmp = NULL;
 	}
-/*
-	if (m_pCon != NULL)
-	{
-		delete m_pCon;
-		m_pCon = NULL;
-	}
-	if (m_pPFr != NULL)
-	{
-		delete m_pPFr;
-		m_pPFr = NULL;
-	}*/
+
 
 }
 
@@ -206,8 +205,10 @@ void CLoadEzdFile::OnOK()
 {
 	// TODO: Add extra validation here
 	UpdateData(true);
-	m_IsLoad = TRUE;
+
+
 	GetDlgItem(IDC_EZDFILENAME)->SetWindowText(_T(""));
+	GetDlgItem(IDC_EZDFILENAME)->SetFocus();
 
 
 	CDialog::OnOK();

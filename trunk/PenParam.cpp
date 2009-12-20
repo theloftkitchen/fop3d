@@ -108,15 +108,17 @@ END_MESSAGE_MAP()
 void CPenParam::OnOK() 
 {
 	// TODO: Add extra validation here
-	UpdateData(true);
-	m_IsLoad = FALSE;
+//	
+		UpdateData(true);
+
+
 	m_pConnector->lmc1_SetPenParam(m_nPenNo,m_nMarkLoop,m_ndMarkSpeed,m_ndPowerRatio,m_ndCurrent,
 		m_nFreq,m_nQPluse,m_nStartTC,m_nLaserOffTC,m_nEndTC,
 		m_nPolyTC,m_ndJumpSpeed,m_nJumpPosTC,m_nJumpDisTC,m_ndEndComp,
 		m_ndAccDist,m_ndPointTime,m_nbPulsePointMode,m_nPulseNum,m_ndFlySpeed
 		
 									);
-	int nSaveMessage = MessageBox(_T("是否保存当前设置?"),_T("提示"),32+4);
+	int nSaveMessage = MessageBox(_T("已经将参数据保存至内存,是否保存当前设置至文件"),_T("提示"),32+4+0);
 	if (IDYES == nSaveMessage)
 	{
 		CFileDialog dlg(FALSE,_T(""),NULL,OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT,_T("Ezcad file(*.ezd)|*.ezd|"));
@@ -136,6 +138,10 @@ void CPenParam::OnOK()
 
 
 	}
+		UpdateData(FALSE);
+
+	
+		m_IsLoad = FALSE;
 	
 
 	
@@ -155,16 +161,20 @@ BOOL CPenParam::OnInitDialog()
 	m_pConnector = m_pFrame->m_pTreeView;
 
 	
-	/*
+	
 	if (m_IsLoad == FALSE)
 			{
 				AfxMessageBox(_T("请先载入模型文件!"));
 				SendMessage(WM_CLOSE,0,0);
+				
 		
 			}
-		*/
+	
 	
 	//initial variable
+
+	else
+	{
 
 	
 	int i = 0;
@@ -242,6 +252,7 @@ BOOL CPenParam::OnInitDialog()
 	m_cEndComp.EnableWindow(FALSE);
 	m_cJumpSpeed.EnableWindow(FALSE);
 	m_cPointTime.EnableWindow(FALSE);
+	}
 	
 	
 

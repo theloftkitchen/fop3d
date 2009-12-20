@@ -22,6 +22,8 @@ public:
 	CDemoView* m_pCon;
 	CMainFrame * m_pPFr;
 	CString m_nReturnLoadFileName;
+	BOOL m_nReadFlag;
+
 	
 	
 

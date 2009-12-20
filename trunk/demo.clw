@@ -15,21 +15,21 @@ Class3=CDemoView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDD_InputScanName
+Resource1=IDD_SELECTDLG
 Class5=CAboutDlg
-Resource2=IDD_SELECTDLG
+Resource2=IDR_MAINFRAME
 Class6=SelectDLG
-Resource3=IDD_LOADFILE
+Resource3=IDD_PENPARA
 Class7=CControlWnd
-Resource4=IDD_SCANOBJ
+Resource4=IDD_ControlWnd
 Class8=CInputScanName
-Resource5=IDD_ABOUTBOX
+Resource5=IDD_LOADFILE
 Class9=CPenParam
-Resource6=IDD_PENPARA
+Resource6=IDD_InputScanName
 Class10=CScanObj
-Resource7=IDR_MAINFRAME
+Resource7=IDD_SCANOBJ
 Class11=CLoadEzdFile
-Resource8=IDD_ControlWnd
+Resource8=IDD_ABOUTBOX
 Class12=CChooseField
 Resource9=IDD_CHOOSEFIELD
 
@@ -315,7 +315,7 @@ ControlCount=7
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_STATIC,static,1342308352
-Control4=IDC_EZDFILENAME,edit,1350633600
+Control4=IDC_EZDFILENAME,edit,1350631552
 Control5=IDC_FILESCAN,button,1342242816
 Control6=IDC_STATIC_WND,static,1342177287
 Control7=IDC_STATIC,static,1342308352
@@ -332,11 +332,12 @@ VirtualFilter=dWC
 [DLG:IDD_CHOOSEFIELD]
 Type=1
 Class=CChooseField
-ControlCount=4
+ControlCount=5
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
 Control3=IDC_STATIC,static,1342308352
 Control4=IDC_FIELD,listbox,1344340227
+Control5=IDC_DELETEFROMDB,button,1342242816
 
 [CLS:CChooseField]
 Type=0

@@ -16,6 +16,7 @@ class CInputScanName : public CDialog
 public:
 	CInputScanName(CWnd* pParent = NULL);   // standard constructor
 	_RecordsetPtr m_pRecord;
+	BOOL m_nIsReplace;
 
 
 // Dialog Data

@@ -1,9 +1,9 @@
-// Created by Microsoft (R) C/C++ Compiler Version 12.00.8168.0 (e1fe836e).
+// Created by Microsoft (R) C/C++ Compiler Version 12.00.8168.0 (6cd0c161).
 //
-// d:\2009-12-12空间点云数据的各种变换和检选以及二维点云的三角化\debug\msado15.tli
+// e:\fop3d\debug\msado15.tli
 //
 // Wrapper implementations for Win32 type library C:\Program Files\Common Files\System\ado\msado15.dll
-// compiler-generated file created 12/17/09 at 19:20:56 - DO NOT EDIT!
+// compiler-generated file created 12/20/09 at 10:58:41 - DO NOT EDIT!
 
 #pragma once
 

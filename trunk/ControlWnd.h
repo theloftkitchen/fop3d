@@ -94,6 +94,7 @@ public:
 	
 	static UINT SaveDataFunc(LPVOID lpPara);
 	static UINT MarkEntityFunc(LPVOID lpParam);
+	static UINT UpdataDataFunc(LPVOID lpParam);
 
 // Overrides
 	// ClassWizard generated virtual function overrides
