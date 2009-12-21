@@ -134,8 +134,6 @@ void CChooseField::OnDeletefromdb()
 		MessageBox(_T("数据已经删除完毕"),_T("提示"),0+64+0);
 
 	}
-	m_pRecord->Close();
-	this->ReadFromDataBase();
 	UpdateData(FALSE);
 
 

@@ -677,8 +677,8 @@ void CControlWnd::OnUpdata()
 	//UpdateData(TRUE);
 	
 	
-	//	Count3DAxis(timeAr,15600);//15600应该变成扫描点数的平方.
-	Count3DAxis(fdata,m_nCounter);
+		Count3DAxis(timeAr,15600);//15600应该变成扫描点数的平方.
+//	Count3DAxis(fdata,m_nCounter);
 	
 	NormalizeData(DataX,DataY,DataZ,m_nDrawCounter);
 	

@@ -18,6 +18,31 @@ protected: // create from serialization only
 
 // Attributes
 public:
+	int m_nPenNo;
+	int m_nMarkLoop;
+	double m_ndMarkSpeed;
+	double m_ndPowerRatio;
+	double m_ndCurrent;
+	
+	int m_nFreq;
+	int m_nQPluse;
+	int m_nStartTC;
+	int m_nLaserOffTC;
+	int m_nEndTC;
+	
+	int m_nPolyTC;
+	double m_ndJumpSpeed;
+	int m_nJumpPosTC;
+	int m_nJumpDisTC;
+	double m_ndEndComp;
+	
+	double m_ndAccDist;
+	double m_ndPointTime;
+	BOOL m_nbPulsePointMode;
+	int m_nPulseNum;
+	double m_ndFlySpeed;
+	
+
 
 // Operations
 public:
