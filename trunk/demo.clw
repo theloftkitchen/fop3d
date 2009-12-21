@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CControlWnd
+LastClass=CLoadEzdFile
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "demo.h"
@@ -15,21 +15,21 @@ Class3=CDemoView
 Class4=CMainFrame
 
 ResourceCount=9
-Resource1=IDD_SCANOBJ
+Resource1=IDD_PENPARA
 Class5=CAboutDlg
-Resource2=IDD_LOADFILE
+Resource2=IDD_SCANOBJ
 Class6=SelectDLG
-Resource3=IDD_InputScanName
+Resource3=IDD_ControlWnd
 Class7=CControlWnd
-Resource4=IDD_SELECTDLG
+Resource4=IDD_ABOUTBOX
 Class8=CInputScanName
-Resource5=IDD_ABOUTBOX
+Resource5=IDR_MAINFRAME
 Class9=CPenParam
-Resource6=IDR_MAINFRAME
+Resource6=IDD_LOADFILE
 Class10=CScanObj
-Resource7=IDD_PENPARA
+Resource7=IDD_InputScanName
 Class11=CLoadEzdFile
-Resource8=IDD_ControlWnd
+Resource8=IDD_SELECTDLG
 Class12=CChooseField
 Resource9=IDD_CHOOSEFIELD
 

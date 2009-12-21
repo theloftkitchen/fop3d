@@ -146,16 +146,8 @@ void CPenParam::OnOK()
 	}
 	}
 	
-		UpdateData(FALSE);
-
-	
+		UpdateData(FALSE);	
 		m_IsLoad = FALSE;
-	
-
-	
-
-
-
 	CDialog::OnOK();
 }
 
