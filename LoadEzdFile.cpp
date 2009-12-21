@@ -5,6 +5,7 @@
 #include "demo.h"
 #include "LoadEzdFile.h"
 #include "demoView.h"
+#include "demoDoc.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -32,6 +33,27 @@ CLoadEzdFile::CLoadEzdFile(CWnd* pParent /*=NULL*/)
 	m_IsLoad = FALSE;
 	m_nReturnLoadFileName = _T("");
 	m_nReadFlag = FALSE;
+
+	m_nbPulsePointMode = FALSE;
+	m_ndAccDist = 0;
+	m_ndCurrent = 0;
+	m_ndEndComp = 0;
+	m_ndFlySpeed =0;
+	m_ndJumpSpeed = 0;
+	m_ndMarkSpeed = 0;
+	m_ndPointTime = 0;
+	m_ndPowerRatio = 0;
+	m_nEndTC = 0;
+	m_nFreq = 0;
+	m_nJumpDisTC = 0;
+	m_nJumpPosTC = 0;
+	m_nLaserOffTC = 0;
+	m_nMarkLoop = 0;
+	m_nPenNo = 0;
+	m_nPolyTC = 0;
+	m_nPulseNum = 0;
+	m_nQPluse = 0;
+	m_nStartTC = 0;
 
 }
 
@@ -76,6 +98,7 @@ BOOL CLoadEzdFile::OnInitDialog()
 void CLoadEzdFile::OnFilescan() 
 {
 	// TODO: Add your control notification handler code here
+		CDemoDoc *pDoc = m_pCon->GetDocument();
 	
 	CFileDialog dlg(TRUE,_T(""),NULL,OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT,_T("Ezcad file(*.ezd)|*.ezd|"));
 	
@@ -96,6 +119,40 @@ void CLoadEzdFile::OnFilescan()
 		TCHAR szFile[256];
 		_tcscpy(szFile,m_strFileName);
 		int nErr = m_pCon->lmc1_LoadEzdFile(szFile);
+	//get the value;
+
+		m_pCon->lmc1_GetPenParam(m_nPenNo,m_nMarkLoop,m_ndMarkSpeed,m_ndPowerRatio,m_ndCurrent,
+			m_nFreq,m_nQPluse,m_nStartTC,m_nLaserOffTC,m_nEndTC,
+			m_nPolyTC,m_ndJumpSpeed,m_nJumpPosTC,m_nJumpDisTC,m_ndEndComp,
+			m_ndAccDist,m_ndPointTime,m_nbPulsePointMode,m_nPulseNum,m_ndFlySpeed
+			
+									);
+		pDoc->m_nPenNo = m_nPenNo;
+		pDoc->m_nMarkLoop = m_nMarkLoop;
+		pDoc->m_ndMarkSpeed = m_ndMarkSpeed;
+		pDoc->m_ndPowerRatio = m_ndPowerRatio;
+		pDoc->m_ndCurrent = m_ndCurrent;
+		pDoc->m_nFreq = m_nFreq;
+		pDoc->m_nQPluse = m_nQPluse;
+		pDoc->m_nStartTC = m_nStartTC;
+		pDoc->m_nLaserOffTC = m_nLaserOffTC;
+		pDoc->m_nEndTC = m_nEndTC;
+		pDoc->m_nPolyTC = m_nPolyTC;
+		pDoc->m_ndJumpSpeed = m_ndJumpSpeed;
+		pDoc->m_nJumpDisTC = m_nJumpDisTC;
+		pDoc->m_nJumpPosTC = m_nJumpPosTC;
+		pDoc->m_ndEndComp = m_ndEndComp;
+		pDoc->m_ndAccDist = m_ndAccDist;
+		pDoc->m_ndPointTime = m_ndPointTime;
+		pDoc->m_nbPulsePointMode = m_nbPulsePointMode;
+		pDoc->m_nPulseNum = m_nPulseNum;
+		pDoc->m_ndFlySpeed = m_ndFlySpeed;
+		pDoc->UpdateAllViews(m_pCon);
+		
+		//end getting the value;
+
+
+
 		if(nErr!=LMC1_ERR_SUCCESS)
 		{
 			AfxMessageBox(_T("Read ezdfile failed!"));				

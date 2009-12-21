@@ -5,6 +5,7 @@
 #include "demo.h"
 #include "PenParam.h"
 #include "demoView.h"
+#include "demoDoc.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -118,26 +119,33 @@ void CPenParam::OnOK()
 		m_ndAccDist,m_ndPointTime,m_nbPulsePointMode,m_nPulseNum,m_ndFlySpeed
 		
 									);
-	int nSaveMessage = MessageBox(_T("已经将参数据保存至内存,是否保存当前设置至文件"),_T("提示"),32+4+0);
-	if (IDYES == nSaveMessage)
+	if (BST_CHECKED == IsDlgButtonChecked( IDC_CHECKDEFAULT))
 	{
-		CFileDialog dlg(FALSE,_T(""),NULL,OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT,_T("Ezcad file(*.ezd)|*.ezd|"));
-		
-		if(dlg.DoModal()==IDOK)
-		{
-			CString strFileName = dlg.GetPathName();
-			
-			TCHAR szFile[256];
-			_tcscpy(szFile,strFileName);
-			int nErr = m_pConnector->lmc1_SaveEntLibToFile(szFile);
-			if(nErr!=LMC1_ERR_SUCCESS)
-			{
-				AfxMessageBox(_T("Read ezdfile failed!"));				
-			}
-		}
-
-
 	}
+	else
+	{
+		int nSaveMessage = MessageBox(_T("已经将参数据保存至内存,是否保存当前设置至文件"),_T("提示"),32+4+0);
+		if (IDYES == nSaveMessage)
+		{
+			CFileDialog dlg(FALSE,_T(""),NULL,OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT,_T("Ezcad file(*.ezd)|*.ezd|"));
+			
+			if(dlg.DoModal()==IDOK)
+			{
+				CString strFileName = dlg.GetPathName();
+				
+				TCHAR szFile[256];
+				_tcscpy(szFile,strFileName);
+				int nErr = m_pConnector->lmc1_SaveEntLibToFile(szFile);
+				if(nErr!=LMC1_ERR_SUCCESS)
+				{
+					AfxMessageBox(_T("Read ezdfile failed!"));				
+				}
+			}
+			
+			
+	}
+	}
+	
 		UpdateData(FALSE);
 
 	
@@ -159,6 +167,8 @@ BOOL CPenParam::OnInitDialog()
 
 	m_pFrame = (CMainFrame*)AfxGetMainWnd();
 	m_pConnector = m_pFrame->m_pTreeView;
+	CDemoDoc *pDoc = m_pConnector->GetDocument();
+
 
 	
 	
@@ -189,6 +199,7 @@ BOOL CPenParam::OnInitDialog()
 		((CComboBox*)GetDlgItem(IDC_JUMPPOSTC))->AddString(tmp);
 		((CComboBox*)GetDlgItem(IDC_POLYTC))->AddString(tmp);
 		
+		
 	}
 	
 		
@@ -200,12 +211,38 @@ BOOL CPenParam::OnInitDialog()
 	
 
 
+/*
 	m_pConnector->lmc1_GetPenParam(m_nPenNo,m_nMarkLoop,m_ndMarkSpeed,m_ndPowerRatio,m_ndCurrent,
 									m_nFreq,m_nQPluse,m_nStartTC,m_nLaserOffTC,m_nEndTC,
 									m_nPolyTC,m_ndJumpSpeed,m_nJumpPosTC,m_nJumpDisTC,m_ndEndComp,
 									m_ndAccDist,m_ndPointTime,m_nbPulsePointMode,m_nPulseNum,m_ndFlySpeed
 
 									);
+	m_tEndComp = m_ndEndComp;
+	m_tAccDist = m_ndAccDist;
+	m_tJumpSpeed = m_ndJumpSpeed;
+	m_tPointTime  = m_ndPointTime;
+*/
+	m_nPenNo = pDoc->m_nPenNo;
+	m_nMarkLoop = pDoc->m_nMarkLoop;
+	m_ndMarkSpeed = pDoc->m_ndMarkSpeed;
+	m_ndPowerRatio = pDoc->m_ndPowerRatio;
+	m_nFreq = pDoc->m_nFreq;
+	m_nQPluse = pDoc->m_nQPluse;
+	m_nStartTC = pDoc->m_nStartTC;
+	m_nLaserOffTC = pDoc->m_nLaserOffTC;
+	m_nEndTC = pDoc->m_nEndTC;
+	m_nPolyTC = pDoc->m_nPolyTC;
+	m_ndJumpSpeed = pDoc->m_ndJumpSpeed;
+	m_nJumpPosTC = pDoc->m_nJumpPosTC;
+	m_nJumpDisTC = pDoc->m_nJumpDisTC;
+	m_ndEndComp = pDoc->m_ndEndComp;
+	m_ndAccDist = pDoc->m_ndAccDist;
+	m_ndPointTime = pDoc->m_ndPointTime;
+	m_nbPulsePointMode = pDoc->m_nbPulsePointMode;
+	m_nPulseNum = pDoc->m_nPulseNum;
+	m_ndFlySpeed = pDoc->m_ndFlySpeed;
+	//edit
 	m_tEndComp = m_ndEndComp;
 	m_tAccDist = m_ndAccDist;
 	m_tJumpSpeed = m_ndJumpSpeed;
@@ -228,12 +265,6 @@ BOOL CPenParam::OnInitDialog()
 
 
 	((CButton*)GetDlgItem(IDC_CHECKDEFAULT))->SetCheck(TRUE);
-	((CComboBox*)GetDlgItem(IDC_STARTTC))->SetCurSel(0);
-	((CComboBox*)GetDlgItem(IDC_LASEROFFTC))->SetCurSel(0);
-	((CComboBox*)GetDlgItem(IDC_ENDTC))->SetCurSel(0);
-	((CComboBox*)GetDlgItem(IDC_JUMPDISTTC))->SetCurSel(0);
-	((CComboBox*)GetDlgItem(IDC_JUMPPOSTC))->SetCurSel(0);
-	((CComboBox*)GetDlgItem(IDC_POLYTC))->SetCurSel(0);
 	
 	
 	m_cStartTC.EnableWindow(FALSE);

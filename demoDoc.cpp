@@ -30,6 +30,26 @@ END_MESSAGE_MAP()
 CDemoDoc::CDemoDoc()
 {
 	// TODO: add one-time construction code here
+	m_nbPulsePointMode = FALSE;
+	m_ndAccDist = 0;
+	m_ndCurrent = 0;
+	m_ndEndComp = 0;
+	m_ndFlySpeed =0;
+	m_ndJumpSpeed = 0;
+	m_ndMarkSpeed = 0;
+	m_ndPointTime = 0;
+	m_ndPowerRatio = 0;
+	m_nEndTC = 0;
+	m_nFreq = 0;
+	m_nJumpDisTC = 0;
+	m_nJumpPosTC = 0;
+	m_nLaserOffTC = 0;
+	m_nMarkLoop = 0;
+	m_nPenNo = 0;
+	m_nPolyTC = 0;
+	m_nPulseNum = 0;
+	m_nQPluse = 0;
+	m_nStartTC = 0;
 
 }
 
