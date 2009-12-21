@@ -265,9 +265,7 @@ void CControlWnd::OnInitialUpdate()
 	
 	// TODO: Add your specialized code here and/or call the base class
 	this->m_pFr = (CMainFrame *)AfxGetApp()->m_pMainWnd;
-	//		((CButton*)GetDlgItem(IDC_PENPARAM)).EnableWindow(FALSE);
-	//	GetDlgItem(IDC_READGPIB).EnableWindow(FALSE);
-	//GetDlgItem(IDC_PENPARAM)->EnableWindow(FALSE);
+	//		
 	m_cPenParam.EnableWindow(FALSE);
 	m_cReadFromGPIB.EnableWindow(FALSE);
 	

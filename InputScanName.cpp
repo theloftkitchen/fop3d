@@ -68,9 +68,10 @@ void CInputScanName::OnOK()
 		m_nReturnName = m_nScanObjectName;
 		m_nScanObjectName = _T("");
 		UpdateData(FALSE);
-
-
 		CDialog::OnOK();
+
+
+		
 		
 	}
 	else
@@ -79,14 +80,23 @@ void CInputScanName::OnOK()
 		{
 			m_nReturnName = m_nScanObjectName;
 			m_nIsReplace = TRUE;
-			
+			m_nScanObjectName = _T("");
+			this->GetDlgItem(IDC_INPUTSCANNAME)->SetFocus();
+			this->UpdateData(FALSE);
+			CDialog::OnOK();
 			
 		}
+		else
+		{
+			m_nScanObjectName = _T("");
+			this->GetDlgItem(IDC_INPUTSCANNAME)->SetFocus();
+			this->UpdateData(FALSE);
+
+		}
+		
 	
 
-		m_nScanObjectName = _T("");
-		this->GetDlgItem(IDC_INPUTSCANNAME)->SetFocus();
-		this->UpdateData(FALSE);
+		
 			
 		
 		
