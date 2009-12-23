@@ -20,8 +20,11 @@
 #include <gl/gl.h>
 #include <gl/glaux.h>
 #include "glut.h"
+#include "LoginDlg.h"
+
 const int MESSAGE_STEPPRO = WM_USER + 102;
 const int MEASURETIMES = 30000;
+
 /////////////////////////////////////////////////////////////////////////////
 // CDemoApp:
 // See demo.cpp for the implementation of this class
@@ -34,6 +37,8 @@ class CDemoApp : public CWinApp
 
 public:
 	_ConnectionPtr m_pConnection;
+	CLoginDlg dlgLogin;
+
 
 	CDemoApp();
 

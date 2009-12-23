@@ -50,6 +50,15 @@ CDemoDoc::CDemoDoc()
 	m_nPulseNum = 0;
 	m_nQPluse = 0;
 	m_nStartTC = 0;
+	for (int i =0;i<MEASURETIMES; ++i)
+	{
+		DataX[i] = .0f;
+		DataY[i] = .0f;
+		DataZ[i] = .0f;
+		
+
+	}
+	m_nDrawCounter = 0;
 
 }
 

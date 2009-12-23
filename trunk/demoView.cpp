@@ -532,6 +532,9 @@ void CDemoView::DrawScene(GLenum mode)
 //œ‘ æµ„ºØ
 void CDemoView::DrawPoints(GLenum mode)
 {
+	CDemoDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 		
@@ -540,35 +543,15 @@ void CDemoView::DrawPoints(GLenum mode)
 			//	glPointSize(2.0f);
 			glBegin(GL_POINTS);
 			{
-			/*
-			for(int i=1;i<=dlgload.n3dpoint;i++)
-			{
-			//if(mode==GL_SELECT) glLoadName(i);
-			if(i==(int)selectindex)
-			{
-			glColor3f(0.0f,0.0f,1.0f);
-			//	glVertex3f(dlgload.m_point3d[i-1][0],dlgload.m_point3d[i-1][1],dlgload.m_point3d[i-1][2]);
-			glVertex3f(dlgload.m_point3d[i][0],dlgload.m_point3d[i][1],dlgload.m_point3d[i][2]);
-			//	glVertex3f(dlgload.m_point3d[i+1][0],dlgload.m_point3d[i+1][1],dlgload.m_point3d[i+1][2]);
-			}
-			else
-			{
-			glColor3f(1.0f,0.0f,0.0f);
-			glVertex3f(dlgload.m_point3d[i][0],dlgload.m_point3d[i][1],dlgload.m_point3d[i][2]);
-			
-			  }
-			}*/
-				
-				
-				
+		
 				
 				
 			
-			for(int i=0;i < this->m_pFr->m_pCtrlWnd->m_nDrawCounter;++i)
+			for(int i=0;i < pDoc->m_nDrawCounter;++i)
 			{
 			glColor3f(1.0f,1.0f,1.0f);
 			
-			  glVertex3f(DataX[i],DataY[i],DataZ[i]);
+			  glVertex3f(pDoc->DataX[i],pDoc->DataY[i],pDoc->DataZ[i]);
 			  
 				}
 				

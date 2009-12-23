@@ -54,90 +54,64 @@ CDemoApp theApp;
 
 BOOL CDemoApp::InitInstance()
 {
-	AfxEnableControlContainer();
-
-	// Standard initialization
-	// If you are not using these features and wish to reduce the size
-	//  of your final executable, you should remove from the following
-	//  the specific initialization routines you do not need.
-
-#ifdef _AFXDLL
-	Enable3dControls();			// Call this when using MFC in a shared DLL
-#else
-	Enable3dControlsStatic();	// Call this when linking to MFC statically
-#endif
-
-	// Change the registry key under which our settings are stored.
-	// TODO: You should modify this string to be something appropriate
-	// such as the name of your company or organization.
-	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
-
-	LoadStdProfileSettings();  // Load standard INI file options (including MRU)
-
-	// Register the application's document templates.  Document templates
-	//  serve as the connection between documents, frame windows and views.
-
-	CSingleDocTemplate* pDocTemplate;
-	pDocTemplate = new CSingleDocTemplate(
-		IDR_MAINFRAME,
-		RUNTIME_CLASS(CDemoDoc),
-		RUNTIME_CLASS(CMainFrame),       // main SDI frame window
-		RUNTIME_CLASS(CDemoView));
-	AddDocTemplate(pDocTemplate);
-
-	// Parse command line for standard shell commands, DDE, file open
-	CCommandLineInfo cmdInfo;
-	ParseCommandLine(cmdInfo);
-
-	// Dispatch commands specified on the command line
-	if (!ProcessShellCommand(cmdInfo))
-		return FALSE;
-
-	// The one and only window has been initialized, so show and update it.
-	m_pMainWnd->ShowWindow(SW_SHOWMAXIMIZED);
-	m_pMainWnd->UpdateWindow();
-	m_pMainWnd->SetWindowText(_T("三维显示"));
-
-	//initialize the window;
-//	::CoInitialize(NULL);
 	AfxOleInit();
-	//connect to MSSQL
-
-	HRESULT hr; 
-	try
+	if (dlgLogin.DoModal() == IDOK)
 	{
-		hr=m_pConnection.CreateInstance(__uuidof(Connection));
-		if(SUCCEEDED(hr))
-		{
-			m_pConnection->ConnectionString="File Name=Data.udl";
-			m_pConnection->ConnectionTimeout=10;//等待连接的时间为20s
-			hr=m_pConnection->Open("","","",adConnectUnspecified);
-			if(FAILED(hr))
-			{
-				AfxMessageBox(_T("打开数据库失败！"));
-				//exit(1);
-				return TRUE;
-			}
-		}
-		else
-		{
-			AfxMessageBox(_T("创建连接对象失败！"));
-			//exit(1);
-			return TRUE;
-		}
-	}
-	catch(_com_error e)
-	{
-		_bstr_t bstrSource(e.Source());
-		_bstr_t bstrDescription(e.Description());
-		//AfxMessageBox("数据库连接失败!");
-		AfxMessageBox(bstrSource+bstrDescription);
-		//exit(1);
+		m_pConnection = dlgLogin.m_pConnection;
+		
+		
+		AfxEnableControlContainer();
+		
+		// Standard initialization
+		// If you are not using these features and wish to reduce the size
+		//  of your final executable, you should remove from the following
+		//  the specific initialization routines you do not need.
+		
+#ifdef _AFXDLL
+		Enable3dControls();			// Call this when using MFC in a shared DLL
+#else
+		Enable3dControlsStatic();	// Call this when linking to MFC statically
+#endif
+		
+		// Change the registry key under which our settings are stored.
+		// TODO: You should modify this string to be something appropriate
+		// such as the name of your company or organization.
+		SetRegistryKey(_T("Local AppWizard-Generated Applications"));
+		
+		LoadStdProfileSettings();  // Load standard INI file options (including MRU)
+		
+		// Register the application's document templates.  Document templates
+		//  serve as the connection between documents, frame windows and views.
+		
+		CSingleDocTemplate* pDocTemplate;
+		pDocTemplate = new CSingleDocTemplate(
+			IDR_MAINFRAME,
+			RUNTIME_CLASS(CDemoDoc),
+			RUNTIME_CLASS(CMainFrame),       // main SDI frame window
+			RUNTIME_CLASS(CDemoView));
+		AddDocTemplate(pDocTemplate);
+		
+		// Parse command line for standard shell commands, DDE, file open
+		CCommandLineInfo cmdInfo;
+		ParseCommandLine(cmdInfo);
+		
+		// Dispatch commands specified on the command line
+		if (!ProcessShellCommand(cmdInfo))
+			return FALSE;
+		
+		// The one and only window has been initialized, so show and update it.
+		m_pMainWnd->ShowWindow(SW_SHOWMAXIMIZED);
+		m_pMainWnd->UpdateWindow();
+		m_pMainWnd->SetWindowText(_T("三维显示"));
+		
+	
+		
 		return TRUE;
+	} 
+	else
+	{
+		return FALSE;
 	}
-	 
-
-	return TRUE;
 }
 
 

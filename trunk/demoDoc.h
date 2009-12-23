@@ -41,6 +41,13 @@ public:
 	BOOL m_nbPulsePointMode;
 	int m_nPulseNum;
 	double m_ndFlySpeed;
+
+	//array pass to View to display
+	double DataX[MEASURETIMES];
+	double DataY[MEASURETIMES];
+	double DataZ[MEASURETIMES];
+	int m_nDrawCounter;
+	
 	
 
 
