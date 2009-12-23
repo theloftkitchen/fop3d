@@ -1,0 +1,4 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by demo.rc
+//
+#define HIDC_STARTTC                    0x8091042c    // IDD_PENPARA
