@@ -48,20 +48,18 @@ BOOL CLoginDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	/*
-	CRect rect;
-		GetWindowRect(this,&rect);
-		SetWindowPos(this,(rect.top+rect.bottom)/2,(rect.left+rect.right)/2,rect.Width(),rect.Height());
-			
 	
-		*/
 	
 	this->ShowWindow(SW_SHOWNORMAL);
 	HRESULT hr;
 	try
 	{
+	/*
 		this->m_nInfo = "Connecting...";
-		this->UpdateData(FALSE);
+			this->UpdateData(FALSE);*/
+		this->m_nInfo = "正在进入系统,请稍候...";
+			this->UpdateData(FALSE);
+	
 		Sleep(2000);
 		hr = m_pConnection.CreateInstance(__uuidof(Connection));
 		if (SUCCEEDED(hr))
@@ -73,8 +71,8 @@ BOOL CLoginDlg::OnInitDialog()
 			{
 				hr = m_pConnection->Open("","","",adConnectUnspecified);
 			}
-			this->m_nInfo = "正在进入系统,请稍候...";
-			this->UpdateData(FALSE);
+			
+			Sleep(1000);
 			this->OnOK();
 
 		} 

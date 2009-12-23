@@ -154,11 +154,6 @@ CDemoView::CDemoView()
 	CTRLKEYDOWN=FALSE;
 	m_timer=0;
 
-	dlgload.n3dpoint=0;
-	dlgload.n2dpoint=0;
-	dlgload.ntri=0;
-	
-
 	//Arcball
 	isClicked=false;
 	isRClicked=false;
@@ -567,133 +562,141 @@ void CDemoView::DrawPoints(GLenum mode)
 			glEnd();
 		}
 		//将点变换为球,因为点不是几何体不能工作在选择模式下
+	/*
 		if(mode==GL_SELECT)
-		{
-			GLfloat red[]={1.0,0.0,0.0,1.0};
-			GLfloat white[]={1.0,1.0,1.0,1.0};
-			glPolygonMode(GL_BACK,GL_FILL);
-			glEnable(GL_LIGHTING);
-			for(int i=0;i<dlgload.n3dpoint;i++)
 			{
-				if(mode==GL_SELECT) glLoadName(i);
-				if(i==(int)selectindex)
+				GLfloat red[]={1.0,0.0,0.0,1.0};
+				GLfloat white[]={1.0,1.0,1.0,1.0};
+				glPolygonMode(GL_BACK,GL_FILL);
+				glEnable(GL_LIGHTING);
+				for(int i=0;i<dlgload.n3dpoint;i++)
 				{
-					glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,red);
-					glTranslatef(dlgload.m_point3d[i][0],dlgload.m_point3d[i][1],dlgload.m_point3d[i][2]);
-					glutSolidSphere(0.03,5,5);
-					glTranslatef(-dlgload.m_point3d[i][0],-dlgload.m_point3d[i][1],-dlgload.m_point3d[i][2]);
+					if(mode==GL_SELECT) glLoadName(i);
+					if(i==(int)selectindex)
+					{
+						glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,red);
+						glTranslatef(dlgload.m_point3d[i][0],dlgload.m_point3d[i][1],dlgload.m_point3d[i][2]);
+						glutSolidSphere(0.03,5,5);
+						glTranslatef(-dlgload.m_point3d[i][0],-dlgload.m_point3d[i][1],-dlgload.m_point3d[i][2]);
+					}
+					else
+					{
+						glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,white);
+						glTranslatef(dlgload.m_point3d[i][0],dlgload.m_point3d[i][1],dlgload.m_point3d[i][2]);
+						glutSolidSphere(0.03,5,5);
+						glTranslatef(-dlgload.m_point3d[i][0],-dlgload.m_point3d[i][1],-dlgload.m_point3d[i][2]);
+					}
 				}
-				else
-				{
-					glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,white);
-					glTranslatef(dlgload.m_point3d[i][0],dlgload.m_point3d[i][1],dlgload.m_point3d[i][2]);
-					glutSolidSphere(0.03,5,5);
-					glTranslatef(-dlgload.m_point3d[i][0],-dlgload.m_point3d[i][1],-dlgload.m_point3d[i][2]);
-				}
-			}
-			glDisable(GL_LIGHTING);
-		}
+				glDisable(GL_LIGHTING);
+			}*/
+	
 		glDisable(GL_DEPTH_TEST);
 }
 //显示三角网格
 void CDemoView::DrawTriMesh(GLenum mode)
 {
 	glLineWidth(1.0f);
+    /*
     glColor3f(0.0f,0.0f,0.0f);
-	for(int i=0;i<dlgload.ntri;i++)
-	{
-		glBegin(GL_LINE_LOOP);
-	        glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][0]][0],(float)dlgload.m_point3d[dlgload.triangle[i][0]][1],(float)dlgload.m_point3d[dlgload.triangle[i][0]][2]);
-		    glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][1]][0],(float)dlgload.m_point3d[dlgload.triangle[i][1]][1],(float)dlgload.m_point3d[dlgload.triangle[i][1]][2]);
-		    glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][2]][0],(float)dlgload.m_point3d[dlgload.triangle[i][2]][1],(float)dlgload.m_point3d[dlgload.triangle[i][2]][2]);
-		glEnd();
-	}
+    	for(int i=0;i<dlgload.ntri;i++)
+    	{
+    		glBegin(GL_LINE_LOOP);
+    	        glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][0]][0],(float)dlgload.m_point3d[dlgload.triangle[i][0]][1],(float)dlgload.m_point3d[dlgload.triangle[i][0]][2]);
+    		    glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][1]][0],(float)dlgload.m_point3d[dlgload.triangle[i][1]][1],(float)dlgload.m_point3d[dlgload.triangle[i][1]][2]);
+    		    glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][2]][0],(float)dlgload.m_point3d[dlgload.triangle[i][2]][1],(float)dlgload.m_point3d[dlgload.triangle[i][2]][2]);
+    		glEnd();
+    	}*/
+    
 }
 //显示三角化贴纹理
 void CDemoView::GlTexture()
 {
+	/*
 	glPushMatrix();
-	GLubyte *pTextureBits2=(GLubyte *)dlgload.mDib2.Buffer();
-	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
-
-	//定义纹理
-	glTexImage2D(GL_TEXTURE_2D,0,3,512,512,0,GL_BGR_EXT,GL_UNSIGNED_BYTE,pTextureBits2);
-
-	//控制纹理
-	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP);
-	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP);
-	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-
-	//说明纹理贴图方式
-	glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_DECAL);
-
-	//启动纹理贴图
-	glEnable(GL_TEXTURE_2D);
-	glShadeModel(GL_SMOOTH);
-
-	//定义纹理坐标和物体几何坐标//三角化贴纹理
-	for(int i=0;i<dlgload.ntri;i++)
-	{
-		float texcoord[3][2];
-		texcoord[0][0]=(float)dlgload.m_point2d[dlgload.triangle[i][0]][0]/dlgload.ImageSize.cx;
-		texcoord[0][1]=(dlgload.ImageSize.cy-(float)dlgload.m_point2d[dlgload.triangle[i][0]][1])/dlgload.ImageSize.cy;
-		texcoord[1][0]=(float)dlgload.m_point2d[dlgload.triangle[i][1]][0]/dlgload.ImageSize.cx;
-		texcoord[1][1]=(dlgload.ImageSize.cy-(float)dlgload.m_point2d[dlgload.triangle[i][1]][1])/dlgload.ImageSize.cy;
-		texcoord[2][0]=(float)dlgload.m_point2d[dlgload.triangle[i][2]][0]/dlgload.ImageSize.cx;
-		texcoord[2][1]=(dlgload.ImageSize.cy-(float)dlgload.m_point2d[dlgload.triangle[i][2]][1])/dlgload.ImageSize.cy;
-	    glBegin(GL_TRIANGLES);
- 		    glTexCoord2f(texcoord[0][0],texcoord[0][1]);
-			glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][0]][0],(float)dlgload.m_point3d[dlgload.triangle[i][0]][1],(float)dlgload.m_point3d[dlgload.triangle[i][0]][2]);
- 		    glTexCoord2f(texcoord[1][0],texcoord[1][1]);
-			glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][1]][0],(float)dlgload.m_point3d[dlgload.triangle[i][1]][1],(float)dlgload.m_point3d[dlgload.triangle[i][1]][2]);
- 		    glTexCoord2f(texcoord[2][0],texcoord[2][1]);
-			glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][2]][0],(float)dlgload.m_point3d[dlgload.triangle[i][2]][1],(float)dlgload.m_point3d[dlgload.triangle[i][2]][2]);
-	    glEnd();
-	}
-    glDisable(GL_TEXTURE_2D);
-	glPopMatrix();
+		GLubyte *pTextureBits2=(GLubyte *)dlgload.mDib2.Buffer();
+		glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+	
+		//定义纹理
+		glTexImage2D(GL_TEXTURE_2D,0,3,512,512,0,GL_BGR_EXT,GL_UNSIGNED_BYTE,pTextureBits2);
+	
+		//控制纹理
+		glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+	
+		//说明纹理贴图方式
+		glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_DECAL);
+	
+		//启动纹理贴图
+		glEnable(GL_TEXTURE_2D);
+		glShadeModel(GL_SMOOTH);
+	
+		//定义纹理坐标和物体几何坐标//三角化贴纹理
+		for(int i=0;i<dlgload.ntri;i++)
+		{
+			float texcoord[3][2];
+			texcoord[0][0]=(float)dlgload.m_point2d[dlgload.triangle[i][0]][0]/dlgload.ImageSize.cx;
+			texcoord[0][1]=(dlgload.ImageSize.cy-(float)dlgload.m_point2d[dlgload.triangle[i][0]][1])/dlgload.ImageSize.cy;
+			texcoord[1][0]=(float)dlgload.m_point2d[dlgload.triangle[i][1]][0]/dlgload.ImageSize.cx;
+			texcoord[1][1]=(dlgload.ImageSize.cy-(float)dlgload.m_point2d[dlgload.triangle[i][1]][1])/dlgload.ImageSize.cy;
+			texcoord[2][0]=(float)dlgload.m_point2d[dlgload.triangle[i][2]][0]/dlgload.ImageSize.cx;
+			texcoord[2][1]=(dlgload.ImageSize.cy-(float)dlgload.m_point2d[dlgload.triangle[i][2]][1])/dlgload.ImageSize.cy;
+		    glBegin(GL_TRIANGLES);
+	 		    glTexCoord2f(texcoord[0][0],texcoord[0][1]);
+				glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][0]][0],(float)dlgload.m_point3d[dlgload.triangle[i][0]][1],(float)dlgload.m_point3d[dlgload.triangle[i][0]][2]);
+	 		    glTexCoord2f(texcoord[1][0],texcoord[1][1]);
+				glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][1]][0],(float)dlgload.m_point3d[dlgload.triangle[i][1]][1],(float)dlgload.m_point3d[dlgload.triangle[i][1]][2]);
+	 		    glTexCoord2f(texcoord[2][0],texcoord[2][1]);
+				glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][2]][0],(float)dlgload.m_point3d[dlgload.triangle[i][2]][1],(float)dlgload.m_point3d[dlgload.triangle[i][2]][2]);
+		    glEnd();
+		}
+	    glDisable(GL_TEXTURE_2D);
+		glPopMatrix();*/
+	
 }
 //启用光照
 void CDemoView::ShowLight()
 {
+	/*
 	glPushMatrix();
-
-	//定义材质
-	GLfloat mat_diffuse[]={0.8f,0.8f,0.5f,1.0f};
-    //GLfloat mat_specular[]={0.0f,0.0f,0.0f,1.0f};
-    //GLfloat mat_shininess[]={50.0f};
-	glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,mat_diffuse);
-    //glMaterialfv(GL_FRONT,GL_SPECULAR,mat_specular);
-    //glMaterialfv(GL_FRONT,GL_SHININESS,mat_shininess);
-
-    glClearColor(0.0,0.0,0.0,0.0);
-    glShadeModel(GL_SMOOTH);
-
-    glPolygonMode(GL_FRONT,GL_FILL);
-	glColor3f(1.0f,1.0f,1.0f);
-
-	for(int i=0;i<dlgload.ntri;i++)
-	{
-		double dPoint1[3],dPoint2[3],dPoint3[3],dNormal[3];
-		dPoint1[0]=dlgload.m_point3d[dlgload.triangle[i][0]][0];
-		dPoint1[1]=dlgload.m_point3d[dlgload.triangle[i][0]][1];
-		dPoint1[2]=dlgload.m_point3d[dlgload.triangle[i][0]][2];
-		dPoint2[0]=dlgload.m_point3d[dlgload.triangle[i][1]][0];
-		dPoint2[1]=dlgload.m_point3d[dlgload.triangle[i][1]][1];
-		dPoint2[2]=dlgload.m_point3d[dlgload.triangle[i][1]][2];
-		dPoint3[0]=dlgload.m_point3d[dlgload.triangle[i][2]][0];
-		dPoint3[1]=dlgload.m_point3d[dlgload.triangle[i][2]][1];
-		dPoint3[2]=dlgload.m_point3d[dlgload.triangle[i][2]][2];
-		CaculateNormal(dPoint1,dPoint2,dPoint3,dNormal);
-		glBegin(GL_POLYGON);
-			glNormal3dv(dNormal);
-			glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][0]][0],(float)dlgload.m_point3d[dlgload.triangle[i][0]][1],(float)dlgload.m_point3d[dlgload.triangle[i][0]][2]);
-			glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][1]][0],(float)dlgload.m_point3d[dlgload.triangle[i][1]][1],(float)dlgload.m_point3d[dlgload.triangle[i][1]][2]);
-			glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][2]][0],(float)dlgload.m_point3d[dlgload.triangle[i][2]][1],(float)dlgload.m_point3d[dlgload.triangle[i][2]][2]);
-		glEnd();
-	}
-	glPopMatrix();
+	
+		//定义材质
+		GLfloat mat_diffuse[]={0.8f,0.8f,0.5f,1.0f};
+	    //GLfloat mat_specular[]={0.0f,0.0f,0.0f,1.0f};
+	    //GLfloat mat_shininess[]={50.0f};
+		glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,mat_diffuse);
+	    //glMaterialfv(GL_FRONT,GL_SPECULAR,mat_specular);
+	    //glMaterialfv(GL_FRONT,GL_SHININESS,mat_shininess);
+	
+	    glClearColor(0.0,0.0,0.0,0.0);
+	    glShadeModel(GL_SMOOTH);
+	
+	    glPolygonMode(GL_FRONT,GL_FILL);
+		glColor3f(1.0f,1.0f,1.0f);
+	
+		for(int i=0;i<dlgload.ntri;i++)
+		{
+			double dPoint1[3],dPoint2[3],dPoint3[3],dNormal[3];
+			dPoint1[0]=dlgload.m_point3d[dlgload.triangle[i][0]][0];
+			dPoint1[1]=dlgload.m_point3d[dlgload.triangle[i][0]][1];
+			dPoint1[2]=dlgload.m_point3d[dlgload.triangle[i][0]][2];
+			dPoint2[0]=dlgload.m_point3d[dlgload.triangle[i][1]][0];
+			dPoint2[1]=dlgload.m_point3d[dlgload.triangle[i][1]][1];
+			dPoint2[2]=dlgload.m_point3d[dlgload.triangle[i][1]][2];
+			dPoint3[0]=dlgload.m_point3d[dlgload.triangle[i][2]][0];
+			dPoint3[1]=dlgload.m_point3d[dlgload.triangle[i][2]][1];
+			dPoint3[2]=dlgload.m_point3d[dlgload.triangle[i][2]][2];
+			CaculateNormal(dPoint1,dPoint2,dPoint3,dNormal);
+			glBegin(GL_POLYGON);
+				glNormal3dv(dNormal);
+				glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][0]][0],(float)dlgload.m_point3d[dlgload.triangle[i][0]][1],(float)dlgload.m_point3d[dlgload.triangle[i][0]][2]);
+				glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][1]][0],(float)dlgload.m_point3d[dlgload.triangle[i][1]][1],(float)dlgload.m_point3d[dlgload.triangle[i][1]][2]);
+				glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][2]][0],(float)dlgload.m_point3d[dlgload.triangle[i][2]][1],(float)dlgload.m_point3d[dlgload.triangle[i][2]][2]);
+			glEnd();
+		}
+		glPopMatrix();*/
+	
 }
 //显示坐标轴
 void CDemoView::DrawAxis()
@@ -783,28 +786,28 @@ void CDemoView::DrawAxis()
 //显示索引
 void CDemoView::DrawIndex()
 {
+	/*
 	glPushMatrix();
-    glColor3f(1.0f,1.0f,1.0f);
-	wglUseFontBitmaps(wglGetCurrentDC(),0,256,1000);
-	glListBase(1000);
-
-	for(int i=0;i<dlgload.n3dpoint;i++)
-	{
-		CString index;
-		index.Format(_T("%4d"),i);
-		glRasterPos3f(dlgload.m_point3d[i][0],dlgload.m_point3d[i][1],dlgload.m_point3d[i][2]);
-		glCallLists(4,GL_UNSIGNED_BYTE,index);
-	}
-	glPopMatrix();
+	    glColor3f(1.0f,1.0f,1.0f);
+		wglUseFontBitmaps(wglGetCurrentDC(),0,256,1000);
+		glListBase(1000);
+	
+		for(int i=0;i<dlgload.n3dpoint;i++)
+		{
+			CString index;
+			index.Format(_T("%4d"),i);
+			glRasterPos3f(dlgload.m_point3d[i][0],dlgload.m_point3d[i][1],dlgload.m_point3d[i][2]);
+			glCallLists(4,GL_UNSIGNED_BYTE,index);
+		}
+		glPopMatrix();*/
+	
 }
 //控制函数///////////////////////////////////////////////////////////////
 void CDemoView::OnLoad() 
 {
 	// TODO: Add your command handler code here
 	//SelectDLG dlgload;
-	if(dlgload.DoModal()==IDOK)
-	{
-	}
+	dlgLoadEzdFile.DoModal();
 }
 void CDemoView::OnShowPoints() 
 {
@@ -1142,45 +1145,48 @@ void CDemoView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 void CDemoView::OnBackward() 
 {
 	// TODO: Add your command handler code here
+	/*
 	if(nindeleteindex>0)
-	{
-		//重组恢复删除点后的顶点数组
-		dlgload.m_point2d[deleteindex[nindeleteindex-1]][0]=deletecontent[nindeleteindex-1][0];
-		dlgload.m_point2d[deleteindex[nindeleteindex-1]][1]=deletecontent[nindeleteindex-1][1];
-		dlgload.n2dpoint++;
-		dlgload.m_point3d[deleteindex[nindeleteindex-1]][0]=deletecontent[nindeleteindex-1][2];
-		dlgload.m_point3d[deleteindex[nindeleteindex-1]][1]=deletecontent[nindeleteindex-1][3];
-		dlgload.m_point3d[deleteindex[nindeleteindex-1]][2]=deletecontent[nindeleteindex-1][4];
-		dlgload.n3dpoint++;
-
-		//对恢复后的点进行三角化
-		int kk=0;
-		int &numberoftriangle=kk;		
-		int vertexindex[100000];
-
-		dlgload.triangulation(dlgload.m_point2d,dlgload.n2dpoint,vertexindex,numberoftriangle);
-		dlgload.ntri=numberoftriangle;
-
-		for(int i=0;i<dlgload.ntri;i++)
 		{
-			for(int j=0;j<3;j++)
-				dlgload.triangle[i][j]=vertexindex[i*3+j];		
-		}
-
-		//为撤销恢复操作作准备
-		if(nindeleteindex>0)
-		{
-			nindeleteindex--;
-		}
-		else
-			nindeleteindex=0;
-
-		Invalidate(FALSE);
-	}
+			//重组恢复删除点后的顶点数组
+			dlgload.m_point2d[deleteindex[nindeleteindex-1]][0]=deletecontent[nindeleteindex-1][0];
+			dlgload.m_point2d[deleteindex[nindeleteindex-1]][1]=deletecontent[nindeleteindex-1][1];
+			dlgload.n2dpoint++;
+			dlgload.m_point3d[deleteindex[nindeleteindex-1]][0]=deletecontent[nindeleteindex-1][2];
+			dlgload.m_point3d[deleteindex[nindeleteindex-1]][1]=deletecontent[nindeleteindex-1][3];
+			dlgload.m_point3d[deleteindex[nindeleteindex-1]][2]=deletecontent[nindeleteindex-1][4];
+			dlgload.n3dpoint++;
+	
+			//对恢复后的点进行三角化
+			int kk=0;
+			int &numberoftriangle=kk;		
+			int vertexindex[100000];
+	
+			dlgload.triangulation(dlgload.m_point2d,dlgload.n2dpoint,vertexindex,numberoftriangle);
+			dlgload.ntri=numberoftriangle;
+	
+			for(int i=0;i<dlgload.ntri;i++)
+			{
+				for(int j=0;j<3;j++)
+					dlgload.triangle[i][j]=vertexindex[i*3+j];		
+			}
+	
+			//为撤销恢复操作作准备
+			if(nindeleteindex>0)
+			{
+				nindeleteindex--;
+			}
+			else
+				nindeleteindex=0;
+	
+			Invalidate(FALSE);
+		}*/
+	
 }
 void CDemoView::OnSaveresult() 
 {
 	// TODO: Add your command handler code here
+/*
 	FILE* presult;
 	presult=fopen("3d_data_md.txt","w");
 	for(int i=0;i<dlgload.n3dpoint;i++)
@@ -1192,18 +1198,21 @@ void CDemoView::OnSaveresult()
 	{
 		fprintf(presult,"%f %f\n",dlgload.m_point2d[i][0],dlgload.m_point2d[i][1]);
 	}
-	fclose(presult);	
+	fclose(presult);	*/
+
 }
 void CDemoView::OnSavetrindex() 
 {
 	// TODO: Add your command handler code here
+	/*
 	FILE* presult;
-	presult=fopen("trindex.txt","w");
-	for(int i=0;i<dlgload.ntri;i++)
-	{
-		fprintf(presult,"%d %d %d\n",dlgload.triangle[i][0],dlgload.triangle[i][1],dlgload.triangle[i][2]);
-	}
-	fclose(presult);
+		presult=fopen("trindex.txt","w");
+		for(int i=0;i<dlgload.ntri;i++)
+		{
+			fprintf(presult,"%d %d %d\n",dlgload.triangle[i][0],dlgload.triangle[i][1],dlgload.triangle[i][2]);
+		}
+		fclose(presult);*/
+	
 }
 
 //setcheckbox函数////////////////////////////////////////////////////////
@@ -1342,94 +1351,96 @@ void CDemoView::DoSelect(CPoint point)
 //删除选择的点
 void CDemoView::DeletePnt()
 {
+	/*
 	if(dlgload.n3dpoint!=0)
-	{
-		//为撤销恢复操作作准备
-		nindeleteindex++;
-		if(nindeleteindex==6)
 		{
-			for(int i=0;i<4;i++)
+			//为撤销恢复操作作准备
+			nindeleteindex++;
+			if(nindeleteindex==6)
 			{
-				deleteindex[i]=deleteindex[i+1];
-				deletecontent[i][0]=deletecontent[i+1][0];
-				deletecontent[i][1]=deletecontent[i+1][1];
-				deletecontent[i][2]=deletecontent[i+1][2];
-				deletecontent[i][3]=deletecontent[i+1][3];
-				deletecontent[i][4]=deletecontent[i+1][4];
-			}
-			deleteindex[4]=selectindex;
-			if(dlgload.n2dpoint!=0)
-			{
-				deletecontent[4][0]=dlgload.m_point2d[selectindex][0];
-				deletecontent[4][1]=dlgload.m_point2d[selectindex][1];
-				deletecontent[4][2]=dlgload.m_point3d[selectindex][0];
-				deletecontent[4][3]=dlgload.m_point3d[selectindex][1];
-				deletecontent[4][4]=dlgload.m_point3d[selectindex][2];
-				nindeleteindex--;
+				for(int i=0;i<4;i++)
+				{
+					deleteindex[i]=deleteindex[i+1];
+					deletecontent[i][0]=deletecontent[i+1][0];
+					deletecontent[i][1]=deletecontent[i+1][1];
+					deletecontent[i][2]=deletecontent[i+1][2];
+					deletecontent[i][3]=deletecontent[i+1][3];
+					deletecontent[i][4]=deletecontent[i+1][4];
+				}
+				deleteindex[4]=selectindex;
+				if(dlgload.n2dpoint!=0)
+				{
+					deletecontent[4][0]=dlgload.m_point2d[selectindex][0];
+					deletecontent[4][1]=dlgload.m_point2d[selectindex][1];
+					deletecontent[4][2]=dlgload.m_point3d[selectindex][0];
+					deletecontent[4][3]=dlgload.m_point3d[selectindex][1];
+					deletecontent[4][4]=dlgload.m_point3d[selectindex][2];
+					nindeleteindex--;
+				}
+				else
+				{
+					deletecontent[4][0]=0;
+					deletecontent[4][1]=0;
+					deletecontent[4][2]=dlgload.m_point3d[selectindex][0];
+					deletecontent[4][3]=dlgload.m_point3d[selectindex][1];
+					deletecontent[4][4]=dlgload.m_point3d[selectindex][2];
+					nindeleteindex--;			}
 			}
 			else
 			{
-				deletecontent[4][0]=0;
-				deletecontent[4][1]=0;
-				deletecontent[4][2]=dlgload.m_point3d[selectindex][0];
-				deletecontent[4][3]=dlgload.m_point3d[selectindex][1];
-				deletecontent[4][4]=dlgload.m_point3d[selectindex][2];
-				nindeleteindex--;			}
-		}
-		else
-		{
+				if(dlgload.n2dpoint!=0)
+				{
+					deleteindex[nindeleteindex-1]=selectindex;
+					deletecontent[nindeleteindex-1][0]=dlgload.m_point2d[selectindex][0];
+					deletecontent[nindeleteindex-1][1]=dlgload.m_point2d[selectindex][1];
+					deletecontent[nindeleteindex-1][2]=dlgload.m_point3d[selectindex][0];
+					deletecontent[nindeleteindex-1][3]=dlgload.m_point3d[selectindex][1];
+					deletecontent[nindeleteindex-1][4]=dlgload.m_point3d[selectindex][2];
+				}
+				else
+				{
+					deleteindex[nindeleteindex-1]=selectindex;
+					deletecontent[nindeleteindex-1][0]=0;
+					deletecontent[nindeleteindex-1][1]=0;
+					deletecontent[nindeleteindex-1][2]=dlgload.m_point3d[selectindex][0];
+					deletecontent[nindeleteindex-1][3]=dlgload.m_point3d[selectindex][1];
+					deletecontent[nindeleteindex-1][4]=dlgload.m_point3d[selectindex][2];
+				}
+	
+			}
+	
+			//重组删除点后的顶点数组
 			if(dlgload.n2dpoint!=0)
 			{
-				deleteindex[nindeleteindex-1]=selectindex;
-				deletecontent[nindeleteindex-1][0]=dlgload.m_point2d[selectindex][0];
-				deletecontent[nindeleteindex-1][1]=dlgload.m_point2d[selectindex][1];
-				deletecontent[nindeleteindex-1][2]=dlgload.m_point3d[selectindex][0];
-				deletecontent[nindeleteindex-1][3]=dlgload.m_point3d[selectindex][1];
-				deletecontent[nindeleteindex-1][4]=dlgload.m_point3d[selectindex][2];
+				dlgload.m_point2d[selectindex][0]=dlgload.m_point2d[dlgload.n2dpoint-1][0];
+				dlgload.m_point2d[selectindex][1]=dlgload.m_point2d[dlgload.n2dpoint-1][1];
+				dlgload.n2dpoint--;
 			}
-			else
+			dlgload.m_point3d[selectindex][0]=dlgload.m_point3d[dlgload.n3dpoint-1][0];
+			dlgload.m_point3d[selectindex][1]=dlgload.m_point3d[dlgload.n3dpoint-1][1];
+			dlgload.m_point3d[selectindex][2]=dlgload.m_point3d[dlgload.n3dpoint-1][2];
+			dlgload.n3dpoint--;
+	
+			//对剩下的点进行三角化
+			if(dlgload.n2dpoint!=0)
 			{
-				deleteindex[nindeleteindex-1]=selectindex;
-				deletecontent[nindeleteindex-1][0]=0;
-				deletecontent[nindeleteindex-1][1]=0;
-				deletecontent[nindeleteindex-1][2]=dlgload.m_point3d[selectindex][0];
-				deletecontent[nindeleteindex-1][3]=dlgload.m_point3d[selectindex][1];
-				deletecontent[nindeleteindex-1][4]=dlgload.m_point3d[selectindex][2];
+				int kk=0;
+				int &numberoftriangle=kk;		
+				int vertexindex[100000];
+	
+				dlgload.triangulation(dlgload.m_point2d,dlgload.n2dpoint,vertexindex,numberoftriangle);
+				dlgload.ntri=numberoftriangle;
+	
+				for(int i=0;i<dlgload.ntri;i++)
+				{
+					for(int j=0;j<3;j++)
+						dlgload.triangle[i][j]=vertexindex[i*3+j];		
+				}
 			}
-
-		}
-
-		//重组删除点后的顶点数组
-		if(dlgload.n2dpoint!=0)
-		{
-			dlgload.m_point2d[selectindex][0]=dlgload.m_point2d[dlgload.n2dpoint-1][0];
-			dlgload.m_point2d[selectindex][1]=dlgload.m_point2d[dlgload.n2dpoint-1][1];
-			dlgload.n2dpoint--;
-		}
-		dlgload.m_point3d[selectindex][0]=dlgload.m_point3d[dlgload.n3dpoint-1][0];
-		dlgload.m_point3d[selectindex][1]=dlgload.m_point3d[dlgload.n3dpoint-1][1];
-		dlgload.m_point3d[selectindex][2]=dlgload.m_point3d[dlgload.n3dpoint-1][2];
-		dlgload.n3dpoint--;
-
-		//对剩下的点进行三角化
-		if(dlgload.n2dpoint!=0)
-		{
-			int kk=0;
-			int &numberoftriangle=kk;		
-			int vertexindex[100000];
-
-			dlgload.triangulation(dlgload.m_point2d,dlgload.n2dpoint,vertexindex,numberoftriangle);
-			dlgload.ntri=numberoftriangle;
-
-			for(int i=0;i<dlgload.ntri;i++)
-			{
-				for(int j=0;j<3;j++)
-					dlgload.triangle[i][j]=vertexindex[i*3+j];		
-			}
-		}
-
-		Invalidate(FALSE);
-	}
+	
+			Invalidate(FALSE);
+		}*/
+	
 }
 
 void CDemoView::OnInitialUpdate() 

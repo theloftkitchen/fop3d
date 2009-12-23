@@ -719,14 +719,15 @@ void CControlWnd::Count3DAxis(double *timeArray, int length)
 void CControlWnd::OnReadfromdb() 
 {
 	// TODO: Add your control notification handler code here
-	this->m_pFr->InvalidateAllWnd();
+//	this->m_pFr->InvalidateAllWnd();
 	
 	if(dlgChooseField.DoModal() == IDOK)
 	{
 		m_nScanObjectName = dlgChooseField.m_nReturnField;
 		ReadFromDBFunc();
-		
 		this->m_pFr->m_pTreeView->Invalidate();
+		
+	
 	}
 	
 }
@@ -883,13 +884,6 @@ UINT CControlWnd::MarkEntityFunc(LPVOID lpParam)
 	
 }
 
-//DEL void CControlWnd::OnReset() 
-//DEL {
-//DEL 	// TODO: Add your control notification handler code here
-//DEL //	m_nIsMarkFromFile = FALSE;
-//DEL 
-//DEL }
-
 void CControlWnd::OnClose() 
 {
 	// TODO: Add your message handler code here and/or call default
@@ -1000,12 +994,6 @@ void CControlWnd::NormalizeData(double *dx, double *dy, double *dz, int length)
 void CControlWnd::ReCountFromDb(double *angleH, double *angleV, double *Dist, int length)
 {
 	CDemoDoc *pDoc = m_pCon->GetDocument();
-	for (int j = 0;j<MEASURETIMES;++j)
-	{
-		pDoc->DataX[j] = .0f;
-		pDoc->DataY[j] = .0f;
-		pDoc->DataZ[j] = .0f;
-	}
 	double tmpX = .0f;
 	double tmpY = .0f;
 	double tmpZ = .0f;
@@ -1014,22 +1002,24 @@ void CControlWnd::ReCountFromDb(double *angleH, double *angleV, double *Dist, in
 	{
 		tmpX = Dist[i]*sinf(angleH[i])/CountAngle(angleH[i],angleV[i]);
 		
-		//	DataX[u] = tmpX;
+		
 		pDoc->DataX[i] = tmpX;
+	
 		tmpY = Dist[i]*cosf(angleH[i])*tanf(angleV[i])/CountAngle(angleH[i],angleV[i]);
 		
-		//	DataY[i] = tmpY;
+	
 		pDoc->DataY[i] = tmpY;
+
 		tmpZ = Dist[i]*cosf(angleH[i])/CountAngle(angleH[i],angleV[i]);
 		
-		//DataZ[i] = tmpZ;
+	
 		pDoc->DataZ[i] = tmpZ;
-		
-
 
 	}
+	
 	NormalizeData(pDoc->DataX,pDoc->DataY,pDoc->DataZ,m_nDrawCounter);
 
-
+	
+	pDoc->m_nDrawCounter = length;
 	
 }

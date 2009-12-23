@@ -2,10 +2,9 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 
-#include "SelectDLG.h"
 #include "ArcBall.h"
 #include "MainFrm.h"
-
+#include "LoadEzdFile.h"
 #include "MarkEzdDll.h"
 #if !defined(AFX_DEMOVIEW_H__E69290EC_B14B_49E9_98BD_D705125C7B62__INCLUDED_)
 #define AFX_DEMOVIEW_H__E69290EC_B14B_49E9_98BD_D705125C7B62__INCLUDED_
@@ -16,6 +15,7 @@
 
 class CDemoDoc;
 class CControlWnd;
+
 //class CMainFrame;
 class CDemoView : public CView
 {
@@ -35,10 +35,11 @@ public:
 	CDemoDoc* GetDocument();
 	CMainFrame *m_pFr;
 	CControlWnd *m_pControlWnd;
+	CLoadEzdFile dlgLoadEzdFile;
 
 
 	void DrawAxis();
-	SelectDLG dlgload;
+
 
 	BOOL bSetupPixelFormat();
 	void Init();
