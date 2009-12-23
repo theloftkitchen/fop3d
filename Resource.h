@@ -15,6 +15,7 @@
 #define IDD_SCANOBJ                     146
 #define IDD_LOADFILE                    147
 #define IDD_CHOOSEFIELD                 148
+#define IDD_LOGINDLG                    149
 #define IDC_3DPOS                       1000
 #define IDC_LOAD3D                      1001
 #define IDC_2DPOS                       1002
@@ -74,6 +75,7 @@
 #define IDC_ENDCOMP                     1075
 #define IDC_RETURNNAME                  1077
 #define IDC_DELETEFROMDB                1078
+#define IDC_LOGININFO                   1079
 #define ID_LOAD                         32771
 #define IDM_SHOW_POINTS                 32772
 #define IDM_SHOW_MESH                   32773
@@ -109,9 +111,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        149
+#define _APS_NEXT_RESOURCE_VALUE        150
 #define _APS_NEXT_COMMAND_VALUE         32812
-#define _APS_NEXT_CONTROL_VALUE         1079
+#define _APS_NEXT_CONTROL_VALUE         1080
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

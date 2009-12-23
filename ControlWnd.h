@@ -23,6 +23,7 @@
 #endif
 
 class CMainFrame;
+class CDemoView;
 class CControlWnd : public CFormView
 {
 public:
@@ -59,27 +60,39 @@ public:
 // Attributes
 public:
 	CMainFrame *m_pFr;
+	CDemoView* m_pCon;//pointer points to Veiw.
 	bool miniRotateFlag;
 	CWinThread *m_pSaveThread;
 	CWinThread *m_pMarkEntityThread;
 	_RecordsetPtr m_pRecordset;
 
-	bool m_bRDflag;
-	int m_nCounter ;
-	int m_nDrawCounter;
+	bool m_bRDflag; //a flag mark that the timearray is initialized.
+	int m_nCounter ;//number of scan target time.
+	
 	CInputScanName dlgInputname;
 	CPenParam dlgPenParam;
 	CScanObj dlgScanObj;
 	CLoadEzdFile dlgLoadFile;
 	CChooseField dlgChooseField;
-//	BOOL m_nIsMarkFromFile;
-	//variable on hardware
-//	double fdata[MEASURETIMES]; //测量结果 2W 次
 
+//	double *timeAr;//instance to develop,will be deleted by the end.
+	/*
+	double DataX[MEASURETIMES];
+		double DataY[MEASURETIMES];
+		double DataZ[MEASURETIMES];*/
+	
+	int m_nDrawCounter;//number of points to display.
 
+	//some variables about gpib
 
-	//double  timeAr[15600];
-	double *timeAr;
+	short  Buffer[120000];             /* Read buffer							 */
+	double fdata[MEASURETIMES]; //测量结果 2W 次
+	//some array to be stored in DB;
+	double DataTheta[MEASURETIMES];
+	double DataPhy[MEASURETIMES];
+	double DataDist[MEASURETIMES];
+	
+
 
 
 	
@@ -107,6 +120,10 @@ public:
 
 // Implementation
 public:
+	void ReCountFromDb(double * angleH,double *angleV,double  *Dist, int length);
+	void NormalizeData(double *dx,double *dy, double *dz,int length);
+	void Convert(int mode , int expd , int samples ,int index );
+	bool isInsert;
 	
 	void ReadFromDBFunc();
 	
@@ -127,7 +144,6 @@ public:
 	afx_msg void OnSaveData();
 	afx_msg void OnexitProgram();
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
-	afx_msg void OnCancelMode();
 	afx_msg void OnReadgpib();
 	afx_msg void OnUpdata();
 	afx_msg void OnReadfromdb();
@@ -135,6 +151,7 @@ public:
 	afx_msg void OnPenparam();
 	afx_msg void OnScanbasicobj();
 	afx_msg void OnDestroy();
+	afx_msg void OnClose();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

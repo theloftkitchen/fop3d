@@ -147,7 +147,7 @@ void CLoadEzdFile::OnFilescan()
 		pDoc->m_nbPulsePointMode = m_nbPulsePointMode;
 		pDoc->m_nPulseNum = m_nPulseNum;
 		pDoc->m_ndFlySpeed = m_ndFlySpeed;
-		pDoc->UpdateAllViews(m_pCon);
+
 		
 		//end getting the value;
 

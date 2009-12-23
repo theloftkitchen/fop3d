@@ -2,36 +2,38 @@
 
 [General Info]
 Version=1
-LastClass=CLoadEzdFile
+LastClass=CDemoApp
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "demo.h"
 LastPage=0
 
-ClassCount=12
+ClassCount=13
 Class1=CDemoApp
 Class2=CDemoDoc
 Class3=CDemoView
 Class4=CMainFrame
 
-ResourceCount=9
-Resource1=IDD_PENPARA
+ResourceCount=10
+Resource1=IDD_LOADFILE
 Class5=CAboutDlg
-Resource2=IDD_SCANOBJ
+Resource2=IDD_CHOOSEFIELD
 Class6=SelectDLG
 Resource3=IDD_ControlWnd
 Class7=CControlWnd
-Resource4=IDD_ABOUTBOX
+Resource4=IDD_PENPARA
 Class8=CInputScanName
-Resource5=IDR_MAINFRAME
+Resource5=IDD_ABOUTBOX
 Class9=CPenParam
-Resource6=IDD_LOADFILE
+Resource6=IDR_MAINFRAME
 Class10=CScanObj
-Resource7=IDD_InputScanName
+Resource7=IDD_SCANOBJ
 Class11=CLoadEzdFile
-Resource8=IDD_SELECTDLG
+Resource8=IDD_InputScanName
 Class12=CChooseField
-Resource9=IDD_CHOOSEFIELD
+Resource9=IDD_SELECTDLG
+Class13=CLoginDlg
+Resource10=IDD_LOGINDLG
 
 [CLS:CDemoApp]
 Type=0
@@ -225,7 +227,7 @@ HeaderFile=ControlWnd.h
 ImplementationFile=ControlWnd.cpp
 BaseClass=CFormView
 Filter=D
-LastObject=IDC_RotateX
+LastObject=CControlWnd
 VirtualFilter=VWC
 
 [DLG:IDD_InputScanName]
@@ -346,5 +348,22 @@ ImplementationFile=ChooseField.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=CChooseField
+VirtualFilter=dWC
+
+[DLG:IDD_LOGINDLG]
+Type=1
+Class=CLoginDlg
+ControlCount=3
+Control1=IDOK,button,1342242817
+Control2=IDCANCEL,button,1342242816
+Control3=IDC_LOGININFO,static,1342308352
+
+[CLS:CLoginDlg]
+Type=0
+HeaderFile=LoginDlg.h
+ImplementationFile=LoginDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CLoginDlg
 VirtualFilter=dWC
 

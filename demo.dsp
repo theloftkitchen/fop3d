@@ -128,6 +128,10 @@ SOURCE=.\LoadEzdFile.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\LoginDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MainFrm.cpp
 # End Source File
 # Begin Source File
@@ -190,6 +194,10 @@ SOURCE=.\InputScanName.h
 # Begin Source File
 
 SOURCE=.\LoadEzdFile.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\LoginDlg.h
 # End Source File
 # Begin Source File
 

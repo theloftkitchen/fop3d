@@ -61,7 +61,7 @@ void CInputScanName::OnOK()
 	m_pRecord.CreateInstance(__uuidof(Recordset));
 	CString vSQLIN;
 	CString strFor;
-	strFor.Format(_T("select distinct DATANAME from datatable where DATANAME = '%s'"),m_nScanObjectName);
+	strFor.Format(_T("select distinct TargetName from Target where TargetName = '%s'"),m_nScanObjectName);
 	m_pRecord = theApp.m_pConnection->Execute(_bstr_t(strFor),NULL,adCmdText);
 	if((m_pRecord->BOF) && (m_pRecord->adoEOF))
 	{
@@ -129,6 +129,7 @@ BOOL CInputScanName::OnInitDialog()
 	this->GetDlgItem(IDC_STATICSCAN)->ShowWindow(FALSE);
 	this->GetDlgItem(IDC_SCANNUMQUERY)->ShowWindow(false);
 	this->GetDlgItem(IDC_INPUTSCANNAME)->SetFocus();
+	m_nIsReplace = FALSE;
 
 
 
