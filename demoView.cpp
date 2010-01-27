@@ -7,14 +7,11 @@
 
 #include "demoDoc.h"
 #include "demoView.h"
-#include "SelectDLG.h"
 #include "triangle.h"
 #include "ControlWnd.h"
 
-//#include "AxisTransform.h"
-#include <vector>
-#include <algorithm>
-using namespace std;
+
+
 
 
  
@@ -30,12 +27,6 @@ static char THIS_FILE[] = __FILE__;
 
 #define  pai 3.1415926
 
-
-//global variable
-
-extern vector<double>DataX;
-extern vector<double>DataY;
-extern vector<double>DataZ;
 
 //Arcball
 ArcBallT ArcBall(640.0f, 480.0f);
@@ -463,13 +454,16 @@ void CDemoView::DrawScene(GLenum mode)
 	glRotatef(m_fRotateY,0,1,0);
 	glRotatef(m_fRotateZ,0,0,1);
 
-	if(SHOWPOINTS==TRUE)
+	if(SHOWPOINTS==TRUE )
 	{
 		
 		DrawPoints(mode);
 	}
-    if(SHOWTRIMESH==TRUE)
+    if (SHOWTRIMESH==TRUE)
+    
+	{
 		DrawTriMesh(mode);
+	}
 	if(ENABLELIGHT==TRUE)
 		ShowLight();
     if(TEXTURE==TRUE)
@@ -544,11 +538,30 @@ void CDemoView::DrawPoints(GLenum mode)
 			
 			for(int i=0;i < pDoc->m_nDrawCounter;++i)
 			{
-			glColor3f(1.0f,1.0f,1.0f);
+			//glColor3f(1.0f,1.0f,1.0f);
+				if ((pDoc->DataZ[i] < -1) && (pDoc->DataZ[i] > -2))
+				{
+					glColor3f(pDoc->DataZ[i]+2,pDoc->DataZ[i]+2,pDoc->DataZ[i]+2);
+				} 
+				else if((pDoc->DataZ[i] < 0) && (pDoc->DataZ[i] > -1))
+				{
+					glColor3f(pDoc->DataZ[i]+1,pDoc->DataZ[i]+2,pDoc->DataZ[i]+1);
+
+				}
+				else if(pDoc->DataZ[i] < 2 && pDoc->DataZ[i] > 1)
+				{
+					glColor3f(pDoc->DataZ[i]-1,pDoc->DataZ[i]-2,pDoc->DataZ[i]-1);
+
+				}
+				else
+				{
+					glColor3f(pDoc->DataZ[i],pDoc->DataZ[i],pDoc->DataZ[i]);
+				}
 			
 			  glVertex3f(pDoc->DataX[i],pDoc->DataY[i],pDoc->DataZ[i]);
 			  
 				}
+			
 				
 				/*
 				for (int i = 0;i<cntrldlg.num3Dpoint;++i)
@@ -595,6 +608,8 @@ void CDemoView::DrawPoints(GLenum mode)
 //显示三角网格
 void CDemoView::DrawTriMesh(GLenum mode)
 {
+	CDemoDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
 	glLineWidth(1.0f);
     /*
     glColor3f(0.0f,0.0f,0.0f);
@@ -606,6 +621,35 @@ void CDemoView::DrawTriMesh(GLenum mode)
     		    glVertex3f((float)dlgload.m_point3d[dlgload.triangle[i][2]][0],(float)dlgload.m_point3d[dlgload.triangle[i][2]][1],(float)dlgload.m_point3d[dlgload.triangle[i][2]][2]);
     		glEnd();
     	}*/
+	for(int i=0;i < pDoc->m_nDrawCounter;++i)
+	{
+		
+		/*
+		if ((pDoc->DataZ[i] < -1) && (pDoc->DataZ[i] > -2))
+				{
+					glColor3f(pDoc->DataZ[i]+2,pDoc->DataZ[i]+2,pDoc->DataZ[i]+2);
+				} 
+				else if((pDoc->DataZ[i] < 0) && (pDoc->DataZ[i] > -1))
+				{
+					glColor3f(pDoc->DataZ[i]+1,pDoc->DataZ[i]+2,pDoc->DataZ[i]+1);
+					
+				}
+				else if(pDoc->DataZ[i] < 2 && pDoc->DataZ[i] > 1)
+				{
+					glColor3f(pDoc->DataZ[i]-1,pDoc->DataZ[i]-2,pDoc->DataZ[i]-1);
+					
+				}
+				else
+				{
+					glColor3f(pDoc->DataZ[i],pDoc->DataZ[i],pDoc->DataZ[i]);
+				}*/
+		glBegin(GL_LINE);
+		glVertex3f(pDoc->DataX[i],pDoc->DataY[i],pDoc->DataZ[i]);
+		glVertex3f(pDoc->DataX[i+1],pDoc->DataY[i+1],pDoc->DataZ[i+1]);
+		glEnd();
+
+	}
+
     
 }
 //显示三角化贴纹理
@@ -814,7 +858,7 @@ void CDemoView::OnShowPoints()
 	// TODO: Add your command handler code here
 	SHOWPOINTS=!SHOWPOINTS;
 	TEXTURE=FALSE;
-	//SHOWTRIMESH=FALSE;
+	SHOWTRIMESH=FALSE;
 	ENABLELIGHT=FALSE;
 	Invalidate(FALSE);		
 }
@@ -823,7 +867,7 @@ void CDemoView::OnShowMesh()
 	// TODO: Add your command handler code here
 	SHOWTRIMESH=!SHOWTRIMESH;
 	TEXTURE=FALSE;
-	//SHOWPOINTS=FALSE;
+	SHOWPOINTS=FALSE;
 	ENABLELIGHT=FALSE;
 	Invalidate(FALSE);	
 }
