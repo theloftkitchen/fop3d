@@ -14,6 +14,9 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+extern BOOL IsReadOver;
+extern BOOL IsSaveOver;
+
 /////////////////////////////////////////////////////////////////////////////
 // CMainFrame
 
@@ -208,25 +211,32 @@ void CMainFrame::ProgressStatus(WPARAM wP, LPARAM lP)
 	CString str;
 	m_pProgress.SetPos(n);
 	str.Format(_T("正在读取数据,请稍候...进度%d%%"),n);
-	m_wndStatusBar.SetPaneText(/*m_wndStatusBar.CommandToIndex(ID_PROGRESSTEXT)*/1,str);
+	m_wndStatusBar.SetPaneText(1,str);
 	if (100 == n)
 	{
 		m_pProgress.SetPos(0);
-		/*
-		if (this->m_pCtrlWnd->m_bRDflag)
-				{*/
+		m_wndStatusBar.SetPaneText(1,_T("数据成功获取!"));
+		this->InvalidateAllWnd();
 		
-			m_wndStatusBar.SetPaneText(/*m_wndStatusBar.CommandToIndex(ID_PROGRESSTEXT)*/1,_T("数据成功获取!"));
-			this->InvalidateAllWnd();
-	/*
-		}
-			if (!this->m_pCtrlWnd->m_bRDflag)
-			{
-				m_wndStatusBar.SetPaneText(/ *m_wndStatusBar.CommandToIndex(ID_PROGRESSTEXT)* /1,_T("数据获取失败"));
-				this->InvalidateAllWnd();
-			}*/
-	
 	}
+	
+	if (IsReadOver == TRUE  )
+	{
+		str.Format(_T("操作已成功!"));
+		m_wndStatusBar.SetPaneText(1,str);
+		IsReadOver = FALSE;
+		
+	}
+	if (IsSaveOver == TRUE  )
+	{
+		str.Format(_T("操作已成功!"));
+		m_wndStatusBar.SetPaneText(1,str);
+		IsSaveOver = FALSE;
+		
+	}
+
+	 
+	
 
 		
 

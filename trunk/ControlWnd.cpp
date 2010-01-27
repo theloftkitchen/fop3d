@@ -27,8 +27,8 @@ FILE *out;
 double *timeAr;		//testing
 
 
-
-
+BOOL IsReadOver = FALSE;
+BOOL IsSaveOver = FALSE;
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -225,24 +225,6 @@ void CControlWnd::OnSaveData()
 		
 	}
 	
-	//add 进度条...
-	
-	/*	if(m_bRDflag)
-	{*/
-			
-				
-				
-				/*
-				}
-				else
-				{
-				if(m_pSaveThread)
-				{
-				m_pSaveThread->PostThreadMessage(WM_CLOSE,0,0);
-				::WaitForSingleObject(m_pSaveThread->m_hThread,INFINITE);
-				m_pSaveThread = NULL;
-				}
-}*/
 				
 				
 				UpdateData(FALSE);
@@ -285,24 +267,26 @@ void CControlWnd::OnInitialUpdate()
 	///test...
 	int i =0;
 	
-	timeAr = new double[15600];
+	timeAr = new double[25600];
 	double j=.0f;
 	int k=0;
-	for(i=0 ;i<15600;++i)
+	for(i=0 ;i<25600;++i)
 	{
 		
+	/*
 		if(k == 162)
-		{
-			k = 0;
-			j = .0f;
-			
-		}
-		k++;
-		j=j+0.000000001;
+			{
+				k = 0;
+				j = .0f;
+				
+			}
+			k++;
+			j=j+0.000000001;
+			*/
+	
 		
 		
-		
-		timeAr[i] = .0000067f+j;
+		timeAr[i] = .0000067f;//+j;
 	}
 	
 	
@@ -376,7 +360,7 @@ UINT CControlWnd::SaveDataFunc(LPVOID lpParam)
 			theApp.m_pConnection->RollbackTrans();
 			AfxMessageBox(e.ErrorMessage());
 		}
-		if (0 == n || n == 156/*(m_nScanNum*m_nScanNum)/100,正确*/ )// will be modified........
+		if (0 == n || n == (me->m_nScanNum*me->m_nScanNum)/100 )// will be modified........
 		{
 			++m;
 			me->LaunchProgress(m);
@@ -387,7 +371,11 @@ UINT CControlWnd::SaveDataFunc(LPVOID lpParam)
 		++n;
 		
 	}
-	theApp.m_pConnection->CommitTrans();			
+	theApp.m_pConnection->CommitTrans();
+	IsSaveOver = TRUE;
+	me->LaunchProgress(0);
+	
+	
 	
 	
 	AfxMessageBox(_T("insert successfully"));
@@ -411,7 +399,7 @@ UINT CControlWnd::UpdataDataFunc(LPVOID lpParam)
 	_variant_t RecordAffected;
 	CString strFor;
 	
-	//	vector<double>::iterator Poiter;
+
 	int i=0;
 	int m = 0,n = 0;
 	theApp.m_pConnection->BeginTrans();
@@ -446,7 +434,7 @@ UINT CControlWnd::UpdataDataFunc(LPVOID lpParam)
 			theApp.m_pConnection->RollbackTrans();
 			AfxMessageBox(e.ErrorMessage());
 		}
-		if (0 == n || n == 156/*(m_nScanNum*m_nScanNum)/100,正确*/ )
+		if (0 == n || n == (me->m_nScanNum*me->m_nScanNum)/100 )
 		{
 			++m;
 			me->LaunchProgress(m);
@@ -457,10 +445,14 @@ UINT CControlWnd::UpdataDataFunc(LPVOID lpParam)
 		++n;
 		
 	}
-	theApp.m_pConnection->CommitTrans();			
+	theApp.m_pConnection->CommitTrans();	
+	IsSaveOver = TRUE ;
+	me->LaunchProgress(0);
+//	
+		
 	
 	
-	AfxMessageBox(_T("insert successfully"));
+	AfxMessageBox(_T("update successfully"));
 
 	me->m_pRecordset = NULL;
 
@@ -610,7 +602,7 @@ void CControlWnd::OnUpdata()
 	//UpdateData(TRUE);
 	
 	
-		Count3DAxis(timeAr,15600);//15600应该变成扫描点数的平方.
+		Count3DAxis(timeAr,25600);//15600应该变成扫描点数的平方.
 //	Count3DAxis(fdata,m_nCounter);
 	
 //	NormalizeData(DataX,DataY,DataZ,m_nDrawCounter);
@@ -784,7 +776,7 @@ void CControlWnd::ReadFromDBFunc()
 		//	vFileValue.clear();
 		
 		
-		if (0 == n || n == 156/*(m_nScanNum*m_nScanNum)/100,正确*/ )//.....to modify
+		if (0 == n || n == (m_nScanNum*m_nScanNum)/100 )//.....to modify
 		{
 			++m;
 			::SendMessage(this->m_pFr->m_hWnd,MESSAGE_STEPPRO,m,0);
@@ -798,6 +790,8 @@ void CControlWnd::ReadFromDBFunc()
 		
 		
 	}
+	IsReadOver = TRUE;
+	::SendMessage(this->m_pFr->m_hWnd,MESSAGE_STEPPRO,0,0);
 	m_pRecordset->Close();
 	
 	
@@ -887,14 +881,9 @@ UINT CControlWnd::MarkEntityFunc(LPVOID lpParam)
 void CControlWnd::OnClose() 
 {
 	// TODO: Add your message handler code here and/or call default
-	if(isInsert)
-	{
-		MessageBox(_T("Insert...please don't close"));
-	}
-	else
-	{
+	
 		CFormView::OnClose();
-	}
+	
 	
 }
 

@@ -48,15 +48,13 @@ BOOL CLoginDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	
+	this->GetDlgItem(IDOK)->ShowWindow(FALSE);
+	this->GetDlgItem(IDCANCEL)->ShowWindow(FALSE);
 	
 	this->ShowWindow(SW_SHOWNORMAL);
 	HRESULT hr;
 	try
 	{
-	/*
-		this->m_nInfo = "Connecting...";
-			this->UpdateData(FALSE);*/
 		this->m_nInfo = "正在进入系统,请稍候...";
 			this->UpdateData(FALSE);
 	
@@ -84,11 +82,14 @@ BOOL CLoginDlg::OnInitDialog()
 	}
 	catch (_com_error e)
 	{
+		
 		_bstr_t bstrSource(e.Source());
 		_bstr_t bstrDescription(e.Description());
 		AfxMessageBox(bstrSource+bstrDescription);
+		exit(1);
 		
 	}
+	
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
